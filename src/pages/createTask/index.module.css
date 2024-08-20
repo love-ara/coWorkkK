@@ -1,0 +1,195 @@
+.backgroundCover {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-style: none;
+}
+
+.horizontalLine {
+    width: 105px;
+    height: 3px;
+    margin-bottom: 10px;
+    margin-top: 1px;
+    background-color: gray;
+    /*border-radius: 6px;*/
+}
+
+.createTask {
+    background-color: rgb(131, 181, 170);
+    border-radius: 7px;
+    width: 320px;
+    height: 500px;
+    padding: 20px;
+    border-style: solid;
+    /*border-width: 6px;*/
+}
+
+.header {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 2px;
+    color: white;
+}
+
+.textLabel {
+    color: white;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.title {
+    display: block;
+    background-color: white;
+    border-radius: 3px;
+    border-color: rgb(204, 204, 204);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 270px;
+    border-style: solid;
+    border-width: 2px;
+    height: 28px;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.title::placeholder {
+    color: #b8b5b5;
+    font-size: 13px;
+}
+
+.description {
+    display: block;
+    background-color: white;
+    border-radius: 3px;
+    border-color: rgb(204, 204, 204);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 270px;
+    height: 75px;
+    font-size: 13px;
+    border-style: solid;
+    border-width: 2px;
+    margin-bottom: 5px;
+}
+
+.description::placeholder {
+    color: #b8b5b5;
+    font-size: 13px;
+}
+
+.dates {
+    display: block;
+    margin-bottom: 5px;
+    background-color: white;
+    border-radius: 3px;
+    border-color: rgb(204, 204, 204);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 270px;
+    height: 30px;
+    border-style: solid;
+    border-width: 2px;
+}
+
+input[type="datetime-local"] {
+    color: #676666;
+    font-size: 13px;
+}
+
+input[type="datetime-local"]:focus {
+    color: #101010;
+    font-size: 13px;
+}
+
+
+.cancelButton {
+    border-radius: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-width: 2px;
+    border-color: white;
+    color: white;
+    font-size: 15px;
+    transition: padding 0.3s ease;
+}
+
+.cancelButton:hover {
+    padding-left: 24px; /* Increase left padding */
+    padding-right: 24px; /* Increase right padding */
+    padding-top: 10px; /* Increase top padding */
+    padding-bottom: 10px; /* Increase bottom padding */
+}
+
+
+.createTaskButton {
+    border-radius: 4px;
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: rgb(131, 181, 170);
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+    float: right;
+    font-size: 15px;
+    transition: padding 0.3s;
+}
+
+.createTaskButton:hover {
+    padding-left: 24px; /* Increase left padding */
+    padding-right: 24px; /* Increase right padding */
+    padding-top: 10px; /* Increase top padding */
+    padding-bottom: 10px; /* Increase bottom padding */
+}
+
+.priority {
+    height: 28px;
+    width: 270px;
+    border-radius: 5px;
+    border-color: rgb(204, 204, 204);
+    color: #676666;
+    font-size: 13px;
+    background-color: white;
+}
+
+@keyframes growLine {
+    from {
+        width: 0;
+    }
+    to {
+        width: 105px;
+    }
+}
+
+.horizontalLine {
+    animation: growLine 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.backgroundCover {
+    animation: fadeIn 0.5s ease-in;
+}

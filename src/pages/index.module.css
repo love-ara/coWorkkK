@@ -1,0 +1,206 @@
+/* General animation settings */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes slideInFromLeft {
+    0% { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromRight {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInFromTop {
+    0% { transform: translateY(-100%); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scaleUp {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Main container animation */
+.mainContainer {
+    background-color: rgb(255, 253, 253);
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* NavBar animations */
+.navBar {
+    padding-bottom: 24px;
+    padding-top: 24px;
+    padding-left: 12px;
+    padding-right: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    animation: slideInFromTop 1s ease-in-out;
+}
+
+.firstNavBarSection button,
+.secondNavBarSection button {
+    color: rgb(111, 105, 122);
+    font-size: 14px;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    opacity: 0; /* Start hidden for animation */
+    animation: fadeIn 1.5s ease-in-out forwards;
+}
+
+.firstNavBarSection button:nth-child(1) { animation-delay: 0.2s; }
+.firstNavBarSection button:nth-child(2) { animation-delay: 0.4s; }
+.firstNavBarSection button:nth-child(3) { animation-delay: 0.6s; }
+.firstNavBarSection button:nth-child(4) { animation-delay: 0.8s; }
+.firstNavBarSection button:nth-child(5) { animation-delay: 1s; }
+
+.secondNavBarSection button:nth-child(1) { animation-delay: 0.2s; }
+.secondNavBarSection button:nth-child(2) { animation-delay: 0.4s; }
+.secondNavBarSection button:nth-child(3) { animation-delay: 0.6s; }
+.secondNavBarSection button:nth-child(4) { animation-delay: 0.8s; }
+.secondNavBarSection button:nth-child(5) { animation-delay: 1s; }
+
+.firstNavBarSection {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.secondNavBarSection {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.loginButton {
+    background-color: white; /* Keep the background white */
+    color: rgb(111, 105, 122); /* Text color */
+    border: 2px solid rgb(111, 105, 122); /* Border color */
+    padding: 10px 20px; /* Padding for better spacing */
+    border-radius: 7px; /* Rounded corners */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    animation: scaleUp 1s ease-in-out;
+}
+
+.loginButton:hover {
+    background-color: rgb(70, 60, 107); /* Change background color on hover */
+    color: white; /* Text color on hover */
+    transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+.signUpButton {
+    background-color: rgb(131, 181, 170);
+    padding-left: 42px;
+    padding-right: 42px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 7px;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    animation: scaleUp 1s ease-in-out;
+}
+
+.signUpButton:hover {
+    background-color: rgb(100, 150, 140);
+    transform: scale(1.05);
+}
+
+hr {
+    background-color: rgb(244, 230, 230);
+    border-radius: 2px;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 48px;
+}
+
+.mainBody {
+    padding-left: 72px;
+    padding-right: 72px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.topHeading {
+    font-size: 65px;
+    font-weight: 600;
+    width: 600px;
+    color: rgb(70, 60, 107);
+    line-height: 80px;
+    margin-bottom: 15px;
+    animation: slideInFromLeft 1s ease-in-out;
+}
+
+.firstDiv {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.secondDiv {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.topTexts {
+    font-size: 20px;
+    color: rgb(111, 105, 122);
+    width: 480px;
+    margin-bottom: 20px;
+    animation: slideInFromLeft 1.2s ease-in-out;
+}
+
+.getStartedButton {
+    background-color: rgba(131, 181, 170);
+    color: white;
+    border-radius: 8px;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 180px;
+    font-size: 14px;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    animation: scaleUp 1.5s ease-in-out;
+}
+
+.getStartedButton:hover {
+    background-color: rgba(100, 150, 140);
+    transform: scale(1.1);
+}
+
+.creditCard {
+    color: rgb(130, 119, 121);
+    margin-bottom: 13%;
+    margin-top: 1%;
+}
+
+.planeDiv {
+    display: flex;
+    animation: slideInFromLeft 1.2s ease-in-out;
+}
+
+.bottomHeading {
+    margin-top: 15px;
+    font-size: 50px;
+    font-weight: 600;
+    width: 600px;
+    color: rgb(70, 60, 107);
+    line-height: 65px;
+    margin-bottom: 15px;
+    animation: slideInFromRight 1s ease-in-out;
+}
+
+.bottomTexts {
+    font-size: 20px;
+    color: rgb(111, 105, 122);
+    width: 600px;
+    margin-bottom: 20px;
+    animation: slideInFromRight 1.2s ease-in-out;
+}
