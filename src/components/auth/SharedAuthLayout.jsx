@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { Box, Button, Center, Flex, Stack, Text, Image } from "@chakra-ui/react";
 
-
+const token = localStorage.getItem('googleToken');
 
 
 const SharedAuthLayout = ({
@@ -46,7 +47,7 @@ const SharedAuthLayout = ({
                     <Text color="black" fontSize="3xl" fontWeight="bold">
                         {title}
                     </Text>
-
+                    {formComponent}
                     <Button
                         color="blackAlpha.700"
                         fontSize={13}

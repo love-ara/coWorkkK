@@ -14,7 +14,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from '../../api/userApi'
 
-// Creating schema
 const schema = Yup.object().shape({
     email: Yup.string()
         .required("Email is a required field!")
