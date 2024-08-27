@@ -1,65 +1,64 @@
-/*.mainNavContainer {*/
-/*    background-color: rgba(131, 181, 170);*/
-/*}*/
-
-/* Footer container */
 .footerContainer {
-    background-color: rgb(70, 60, 107);
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(41, 41, 41);
+    justify-content: space-evenly;
+    padding: 60px 10px;
+    align-items: start;
+}
+
+.followUs {
+    font-weight: 400;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
     color: white;
-    padding: 40px 72px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    animation: fadeIn 1s ease-in-out;
 }
 
-/* Footer section */
-.footerSection {
+.socials {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    align-items: center;
 }
 
-/* Footer columns */
-.footerColumn {
-    width: 20%;
+.mobileDownload {
+    display: flex;
 }
 
-/* Footer column titles */
-.footerColumn h4 {
-    font-size: 18px;
-    margin-bottom: 15px;
+.lists {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+    width: 50%;
 }
 
-/* Footer links */
-.footerColumn ul {
+.listHeader {
+    margin-bottom: 18px;
+    font-weight: 700;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+.lists ul {
     list-style-type: none;
-    padding: 0;
+    padding-left: 0;
+    margin-left: 0;
 }
 
-.footerColumn ul li {
-    margin-bottom: 10px;
+.lists ul li {
+    font-family: "Montserrat", sans-serif;
+    color: #BEBEBE;
+    font-size: 16px;
+    margin-bottom: 12px;
+    font-weight: 500;
 }
 
-.footerColumn ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s ease-in-out;
-}
 
-.footerColumn ul li a:hover {
-    color: rgb(131, 181, 170);
-}
-
-/* Footer bottom section */
-.footerBottom {
-    border-top: 1px solid rgb(111, 105, 122);
-    padding-top: 20px;
-    text-align: center;
-}
-
-.footerBottom p {
-    margin: 0;
-    font-size: 14px;
+.faire {
+    font-family: "Montserrat", sans-serif;
+    color: #BEBEBE;
+    font-size: 36px;
+    font-weight: 700;
+    margin-top: 80px;
+    margin-bottom: 20px;
 }

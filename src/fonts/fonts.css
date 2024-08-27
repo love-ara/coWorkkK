@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'GalanoGrotesque';
+    font-weight: normal;
+    font-style: normal;
+    src: url('GalanoGrotesqueRegular.otf');
+}
+
+@font-face {
+    font-family: 'GalanoGrotesque';
+    font-weight: bold;
+    font-style: normal;
+    src: url('GalanoGrotesqueBold.otf');
+}
+
+

@@ -1,21 +1,26 @@
 .container {
     background-color: rgb(248, 246, 255);
-    padding: 25px 100px;
+    padding: 25px 80px;
 }
 
 .navBar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 40px;
 }
 
-.navBarButtonText {
-    color: rgb(65, 62, 84);
-    margin-right: 10px;
+.navBarButton {
+    color: #413E54;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+    border: none;
+    background-color: transparent;
 }
 
 .rightSideNavBar {
-    width: 40%;
+    width: 52%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -26,5 +31,103 @@
     background-color: black;
     padding: 4px 20px;
     border-radius: 4px;
+    font-size: 16px;
 }
 
+.mainBody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.companyMessage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.breakRoutine {
+    font-size: 48px;
+    font-family: "GalanoGrotesque", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    margin-bottom: 0;
+}
+
+.coworkAssist {
+    font-size: 20px;
+    text-align: center;
+}
+
+.discoverCowork,
+.alreadyAMember{
+    border-radius: 32px;
+    font-size: 20px;
+    padding: 6px 30px;
+}
+
+.discoverCowork {
+    background-color: black;
+    color: white;
+    margin-right: 15px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.alreadyAMember {
+    border-color: black;
+    border-width: 1px;
+    margin-left: 15px;
+    border-style: solid;
+    font-family: "Montserrat", sans-serif;
+}
+
+
+
+
+.mainModal {
+    display: flex;
+    justify-content: center;
+}
+
+.modalInfo {
+    background-color: white;
+    border-radius: 24px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 54px;
+    margin-bottom: 60px;
+}
+
+.innerHeader {
+    font-size: 15px;
+    color: #5C5875;
+    margin-bottom: 8px;
+}
+
+.subHeader {
+    font-size: 48px;
+    margin-bottom: 25px;
+    line-height: 45px;
+    font-family: "GalanoGrotesque", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.innerText {
+    font-size: 20px;
+    margin-bottom: 15px;
+    line-height: 25px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.featuresButton {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    font-family: "Montserrat", sans-serif;
+}

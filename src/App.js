@@ -10,6 +10,8 @@ import CreateProject from "./pages/createProject/CreateProject";
 import CreateTask from "./pages/createTask/CreateTask";
 import UpdateTask from "./pages/editTask/EditTask";
 import PrivateRoute from "./components/PrivateRoute";
+import NewLandingPage from "./pages/landingPage/LandingPage"
+
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
                     <Route path="/" element={<LandingPage />} />
                     <Route path="/home" element={<LandingPage />} />
                     <Route path="/auth" element={<Auth />} />
+                    <Route path="/newpage" element={<NewLandingPage />}/>
                     <Route
                         path="/dashboard"
                         element={
