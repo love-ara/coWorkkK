@@ -1,4 +1,4 @@
-.backgroundCover {
+.backgroundDesign {
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
     left: 0;
@@ -190,6 +190,6 @@ input[type="datetime-local"]:focus {
     }
 }
 
-.backgroundCover {
+.backgroundDesign {
     animation: fadeIn 0.5s ease-in;
 }

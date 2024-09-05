@@ -18,19 +18,21 @@ const Footer = () => {
 
                 <div className={style.socials}>
                     <p className={style.followUs}>Follow us</p>
-                    <img src={instagram} alt={"Instagram"}/>
-                    <img src={facebook} alt={"Facebook"}/>
-                    <img src={tiktok} alt={"Tiktok"}/>
-                    <img src={discord} alt={"Discord"}/>
-                    <img src={twitter} alt={"Twitter"}/>
+                    <div className={style.socialMediaIcons}>
+                        <img src={instagram} alt={"Instagram"}/>
+                        <img src={facebook} alt={"Facebook"}/>
+                        <img src={tiktok} alt={"Tiktok"}/>
+                        <img src={discord} alt={"Discord"}/>
+                        <img src={twitter} alt={"Twitter"}/>
+                    </div>
                 </div>
 
-                <div className={style.faire}>
-                    <p>Faire du quotidien un jeu</p>
+                <div className={style.makeEverydayProductive}>
+                    <p>Make every day productive</p>
                 </div>
 
                 <div className={style.mobileDownload}>
-                    <img style={{marginRight : "18px"}} src={appStore} />
+                    <img style={{marginRight: "18px"}} src={appStore}/>
                     <img src={googlePlayStore} />
                 </div>
             </div>

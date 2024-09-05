@@ -11,6 +11,8 @@ import CreateTask from "./pages/createTask/CreateTask";
 import UpdateTask from "./pages/editTask/EditTask";
 import PrivateRoute from "./components/PrivateRoute";
 import NewLandingPage from "./pages/landingPage/LandingPage"
+import Signup from "./pages/signup/Signup";
+import Login from "./pages/login/Login";
 
 
 
@@ -25,6 +27,8 @@ function App() {
                     <Route path="/home" element={<LandingPage />} />
                     <Route path="/auth" element={<Auth />} />
                     <Route path="/newpage" element={<NewLandingPage />}/>
+                    <Route path="/signup" element={<Signup />}/>
+                    <Route path="/login" element={<Login />}/>
                     <Route
                         path="/dashboard"
                         element={

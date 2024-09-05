@@ -14,14 +14,14 @@ const LandingPage = () => {
 
                 <div className={style.navBar}>
                     <div>
-                        <img src={logo}  alt={"Logo"}/>
+                        <img src={logo} alt={"Logo"}/>
                     </div>
                     <div className={style.rightSideNavBar}>
-                        <button className={style.navBarButton} >Home</button>
-                        <button className={style.navBarButton} >Features</button>
-                        <button className={style.navBarButton} >Pricing</button>
-                        <button className={style.navBarButton} >Contact</button>
-                        <button className={style.navBarButton} >Log In</button>
+                        <button className={style.navBarButton}>Home</button>
+                        <button className={style.navBarButton}>Features</button>
+                        <button className={style.navBarButton}>Pricing</button>
+                        <button className={style.navBarButton}>Contact</button>
+                        <button className={style.navBarButton}>Log In</button>
                         <button className={style.signUp}>Sign up</button>
                     </div>
                 </div>
@@ -35,7 +35,7 @@ const LandingPage = () => {
                             engaging,<br/> without disrupting your established habits and routines</p>
                     </div>
 
-                    <div>
+                    <div style={{marginBottom: "48px"}}>
                         <button className={style.discoverCowork}>Discover Cowork</button>
                         <button className={style.alreadyAMember}>Already a member?</button>
                     </div>
@@ -50,13 +50,13 @@ const LandingPage = () => {
                         </div>
                         <div className={style.modalInfo}>
                             <p className={style.innerHeader}>Centralisation</p>
-                            <p className={style.subHeader}>Manage all <br/> your <span style={{color: "#9747FF"}}>adventures</span></p>
+                            <p className={style.subHeader}>Manage all <br/> your <span
+                                style={{color: "#9747FF"}}>adventures</span></p>
                             <p className={style.innerText}>Plan, notify, delegate and manage all areas <br/> of your
                                 projects from a single, all-in-one, <br/> comprehensive, and user-friendly tool.</p>
-                            <button className={style.featuresButton}>Features &#8599;</button>
+                            <button className={style.featuresButton}>Features &nbsp; &#8599;</button>
                         </div>
                     </div>
-
 
                     <div className={style.mainModal}>
                         <div style={{marginRight: "60px"}}>
@@ -72,7 +72,6 @@ const LandingPage = () => {
                         </div>
                     </div>
 
-
                     <div className={style.mainModal}>
                         <div style={{marginRight: "60px"}}>
                             <img src={overSpending} alt={"Overspending"}/>
@@ -87,13 +86,15 @@ const LandingPage = () => {
                         </div>
                     </div>
 
+                    <div style={{marginBottom: "48px"}}>
+                        <button className={style.discoverTheFeatures}>Discover the features &nbsp; &#8599;</button>
+                    </div>
 
                 </div>
 
             </div>
 
-            <Footer />
-
+            <Footer/>
         </>
     );
 }
