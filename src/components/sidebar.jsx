@@ -6,15 +6,20 @@ import {
     MdCheckCircle,
     MdCalendarToday,
     MdPerson,
-    MdAdd
+    MdAdd, MdChat
 } from "react-icons/md";
 import user from "../assets/defaultAvatar.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 const SideBar = () => {
     const [isOpen, setIsOpen] = useState(true);
     const isMobile = window.innerWidth <= 768;
+
+    const navigate = useNavigate();
+    const handleAI = () => {
+        window.location.href = "https://cowork-ai-repo.onrender.com";
+    }
 
     const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -150,8 +155,10 @@ const SideBar = () => {
                     <MenuItem icon={<MdHome />} active>Home</MenuItem>
                     <MenuItem icon={<MdFolder />}>Projects</MenuItem>
                     <MenuItem icon={<MdCheckCircle />}>Tasks</MenuItem>
-                    <MenuItem  routerLink={<Link to="/calendar" />} icon={<MdCalendarToday />}>Agenda</MenuItem>
+                    <MenuItem  Link to="/calendar"  icon={<MdCalendarToday />}>Agenda</MenuItem>
                     <MenuItem icon={<MdPerson />}>Contacts</MenuItem>
+                    <MenuItem icon={<MdChat/>} onClick={handleAI}> Cowork AI</MenuItem>
+
                     <SubMenu label="Favorites" style={{color: "#737089"}}>
                         {['Refactor Project', 'CoWork', 'Alternative to...', 'Rearrangement...'].map((item, index) => (
                             <MenuItem key={index} style={styles.menuItemWithSquare}>
@@ -161,6 +168,9 @@ const SideBar = () => {
                         ))}
                     </SubMenu>
                 </Menu>
+
+
+
 
                 <div className="footer" style={styles.footer}>
                     <div className="new-task" style={styles.newTask}>
