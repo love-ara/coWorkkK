@@ -1,19 +1,25 @@
 import style from "./index.module.css";
-import logoForFooter from "../../footerpageassets/logo-for-footer.png"
-import instagram from "../../footerpageassets/instagram.png"
-import facebook from "../../footerpageassets/facebook.png"
-import tiktok from "../../footerpageassets/tiktok.png"
-import discord from "../../footerpageassets/discord.png"
-import twitter from "../../footerpageassets/twitter.png"
-import appStore from "../../footerpageassets/app-store.png"
-import googlePlayStore from "../../footerpageassets/google-play-store.png"
+import logoForFooter from "../../assets/footerpageassets/logo-for-footer.png"
+import instagram from "../../assets/footerpageassets/instagram.png"
+import facebook from "../../assets/footerpageassets/facebook.png"
+import tiktok from "../../assets/footerpageassets/tiktok.png"
+import discord from "../../assets/footerpageassets/discord.png"
+import twitter from "../../assets/footerpageassets/twitter.png"
+import appStore from "../../assets/footerpageassets/app-store.png"
+import googlePlayStore from "../../assets/footerpageassets/google-play-store.png"
 
 const Footer = () => {
     return (
         <footer className={style.footerContainer}>
             <div>
                 <div style={{marginBottom : "45px"}}>
-                    <img src={logoForFooter}  alt={"Logo"}/>
+                    {/*<img src={logoForFooter}  alt={"Logo"}/>*/}
+                    <p style={{color : "white",
+                        fontSize : "40px",
+                        fontFamily : "Montserrat",
+                        fontWeight : "700"}}>Co<span style={{
+                            color : "rgb(122, 111, 190)"
+                    }}>workk</span></p>
                 </div>
 
                 <div className={style.socials}>
@@ -31,10 +37,10 @@ const Footer = () => {
                     <p>Make every day productive</p>
                 </div>
 
-                <div className={style.mobileDownload}>
-                    <img style={{marginRight: "18px"}} src={appStore}/>
-                    <img src={googlePlayStore} />
-                </div>
+                {/*<div className={style.mobileDownload}>*/}
+                {/*    <img style={{marginRight: "18px"}} src={appStore}/>*/}
+                {/*    <img src={googlePlayStore} />*/}
+                {/*</div>*/}
             </div>
 
             <div className={style.lists}>

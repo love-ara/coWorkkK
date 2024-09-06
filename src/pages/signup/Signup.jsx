@@ -1,24 +1,60 @@
 import style from "./index.module.css"
-import backgroundDesign from "../../signuppageassets/background-design.png"
-import backgroundCover from "../../signuppageassets/background-cover.png"
-import backgroundLogo from "../../signuppageassets/background-logo.png"
-import logo from "../../signuppageassets/Taskiro.png"
-import {Field, Form, Formik} from "formik";
+import backgroundDesign from "../../assets/signuppageassets/background-design.png"
+import backgroundCover from "../../assets/signuppageassets/background-cover.png"
+import backgroundLogo from "../../assets/signuppageassets/background-logo.png"
+import logo from "../../assets/signuppageassets/Taskiro.png"
+import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
+import {useState} from "react";
+import axios from "axios";
 
 
 const Signup = ()=> {
 
-    const schema = Yup.object().shape({
-        firstName: Yup.string().required("First Name is a required field!"),
-        lastName: Yup.string().required("Last Name is a required field!"),
+    const [submitStatus, setSubmitStatus] = useState(null); // For success/error messages
+
+    const initialValues = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+    }
+
+    const validationSchema = Yup.object().shape({
+        firstname: Yup.string()
+            .min(2, 'First name must be at least 2 characters')
+            .required('First name is required'),
+        lastname: Yup.string()
+            .min(2, 'Last name must be at least 2 characters')
+            .required('Last name is required'),
         email: Yup.string()
-            .required("Email is a required field!")
-            .email("Invalid email format!"),
+            .email('Invalid email format')
+            .required('Email is required'),
         password: Yup.string()
-            .required("Password is a required field!")
-            .min(6, "Password must be at least 6 characters!"),
+            .min(8, 'Password must be at least 8 characters')
+            .required('Password is required'),
     });
+
+    // Form submission handler
+    const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+        try {
+            setSubmitStatus(null);
+            const response = await axios.post('http://localhost:8081/user/api/v1/register', values); // Update the backend API URL as needed
+
+            if (response.data.isSuccessful) {
+                setSubmitStatus({ success: 'Signup successful!' });
+                resetForm();
+            } else {
+                setSubmitStatus({ error: response.data.response || 'Something went wrong. Please try again.' });
+            }
+        } catch (error) {
+            setSubmitStatus({ error: error.response?.data?.message || 'An error occurred during signup.' });
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
+
 
     return (
         <>
@@ -28,35 +64,51 @@ const Signup = ()=> {
                 <img src={backgroundLogo} alt={"Background logo"} className={style.backgroundLogo}/>
                 <div className={style.modal}>
                     <div className={style.companyLogo}>
-                        <img src={logo} alt={"Company Logo"}/>
+                        {/*<img src={logo} alt={"Company Logo"}/>*/}
+                        <p style={{
+                            color: "black",
+                            fontSize: "25px",
+                            fontFamily: "Montserrat",
+                            fontWeight: "700"
+                        }}>Co<span style={{
+                            color: "rgb(122, 111, 190)"
+                        }}>workk</span></p>
                     </div>
-                    <Formik>
-                    <Form className={style.signupForm}>
-                            <label className={style.labelTag} htmlFor={"firstname"}>First Name:</label>
+                    <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+                        {({isSubmitting}) => (
+
+                            <Form className={style.signupForm}>
+                                <label className={style.labelTag} htmlFor={"firstname"}>First Name:</label>
                             <Field
                                 className={style.formField}
                                 type="text"
                                 id="firstname"
                                 name="firstname"
                                 placeholder="Enter your first name"/>
+                            <ErrorMessage name="firstname" component="div" className={style.errorMessage} />
 
-                            <label className={style.labelTag} htmlFor={"lastname"}>Last Name:</label>
+
+                        <label className={style.labelTag} htmlFor={"lastname"}>Last Name:</label>
                             <Field
                                 className={style.formField}
                                 type="text"
                                 id="lastname"
                                 name="lastname"
                                 placeholder="Enter your last name"/>
+                            <ErrorMessage name="lastname" component="div" className={style.errorMessage} />
 
-                            <label className={style.labelTag} htmlFor={"email"}>Email:</label>
+
+                        <label className={style.labelTag} htmlFor={"email"}>Email:</label>
                             <Field
                                 className={style.formField}
                                 type="email"
                                 id="email"
                                 name="email"
                                 placeholder="Enter your email"/>
+                            <ErrorMessage name="email" component="div" className={style.errorMessage} />
 
-                            <label className={style.labelTag} htmlFor={"password"}>Password:</label>
+
+                        <label className={style.labelTag} htmlFor={"password"}>Password:</label>
                             <Field
                                 style={{marginBottom : "25px"}}
                                 className={style.formField}
@@ -64,11 +116,30 @@ const Signup = ()=> {
                                 id="password"
                                 name="password"
                                 placeholder="Enter your password"/>
+                            <ErrorMessage name="password" component="div" className={style.errorMessage} />
 
-                            <button className={style.signupButton}>Sign up</button>
+                        {submitStatus && submitStatus.error && (
+                            <div className={style.errorMessage}>{submitStatus.error}</div>
+                        )}
+
+                        {submitStatus && submitStatus.success && (
+                            <div className={style.successMessage}>{submitStatus.success}</div>
+                        )}
+
+                        <button
+                            className={style.signupButton}
+                            type="submit"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 'Signing up...' : 'Sign up'}
+                        </button>
+
+
                         </Form>
+
+                        )}
                     </Formik>
-                    <p className={style.haveAccount}>&#10229; &nbsp; Already have an account ?</p>
+                    <p className={style.haveAccount}>Already have an account? &nbsp;<span className={style.signIn}>Sign in</span></p>
                 </div>
 
                 <p className={style.oneApp}>One single app,<br/>an entire ecosystem</p>

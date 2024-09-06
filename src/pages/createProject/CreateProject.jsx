@@ -1,8 +1,8 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import style from "./index.module.css";
-import SideBar from "../../components/sidebar/SideBar";
-import TaskHeader from "../../components/taskHeader";
+import SideBar from "../../components/sidebar";
+import Header from "../../components/header";
 import { createProject } from "../../api/ProjectService";
 import {useNavigate} from "react-router-dom";
 
@@ -42,7 +42,7 @@ const CreateProject = () => {
 
     return (
         <>
-            <TaskHeader />
+            <Header />
             <SideBar  />
             <div className={style.backgroundCover}>
                 <div className={style.createProject}>

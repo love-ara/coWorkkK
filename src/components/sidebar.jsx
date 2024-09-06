@@ -8,7 +8,7 @@ import {
     MdPerson,
     MdAdd
 } from "react-icons/md";
-import user from "../assets/def.png";
+import user from "../assets/defaultAvatar.png";
 import { Link } from "react-router-dom";
 
 
