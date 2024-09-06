@@ -21,12 +21,12 @@ const schema = Yup.object().shape({
         .email("Invalid email format!"),
     password: Yup.string()
         .required("Password is a required field!")
-        .min(4, "Password must be at least 4 characters!"),
+        .min(5, "Password must be at least 5 characters!"),
 });
 
 const Signup = ({ loading }) => {
     const [show, setShow] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(""); // Ensure this state is defined
+    const [errorMessage, setErrorMessage] = useState("");
     const handleClick = () => setShow(!show);
 
     const handleSubmit = (values) => {

@@ -19,14 +19,14 @@ export const userApi = {
 
 
 export function registerUser(user) {
-    return instance.post(`/api/v1/users/register`, user, {
+    return instance.post(`/api/v1/cowork/users/register`, user, {
         // headers: {'Authorization': `Bearer ${token}`}
     });
 }
 
 
 export function loginUser(username, password) {
-    return instance.post(`/api/v1/users/login`, new URLSearchParams({
+    return instance.post(`/api/v1/cowork/users/login`, new URLSearchParams({
         client_id: 'COWORK',
         grant_type: 'password',
         username: username,

@@ -12,9 +12,8 @@ import * as Yup from "yup";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginUser } from '../../api/userApi'
+import { userApi } from '../../api/userApi'
 
-// Creating schema
 const schema = Yup.object().shape({
     email: Yup.string()
         .required("Email is a required field!")
@@ -26,10 +25,23 @@ const schema = Yup.object().shape({
 
 const Login = ({ signup, loading }) => {
     const [show, setShow] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+
 
     const dispatch = useDispatch();
 
     const handleClick = () => setShow(!show);
+
+
+    const handleSubmit = (values) => {
+        userApi.loginUser(values)
+            .then(response => {
+                console.log("Registration successful:", response.data);
+            })
+            .catch(error => {
+                setErrorMessage(error.response?.data?.message || "Login failed. Please try again.");
+            });
+    };
     return (
         <Formik
             validationSchema={schema}
@@ -37,10 +49,8 @@ const Login = ({ signup, loading }) => {
                 email: "",
                 password: "",
             }}
-            onSubmit={(values) => {
-                console.log(values);
-                dispatch(loginUser(values));
-            }}
+            onSubmit={handleSubmit}
+
         >
 
 
@@ -81,7 +91,6 @@ const Login = ({ signup, loading }) => {
                                 onBlur={handleBlur}
                                 value={values.email}
                             />
-                            {/* If validation is not passed show errors */}
                             <Text color="red.400" fontSize={14} marginTop={2}>
                                 {errors.email && touched.email && errors.email}
                             </Text>
@@ -138,6 +147,11 @@ const Login = ({ signup, loading }) => {
                                     errors.password}
                             </Text>
                         </Box>
+                        {errorMessage && (
+                            <Text color="red.400" fontSize={14} marginTop={2}>
+                                {errorMessage}
+                            </Text>
+                        )}
                         <Button
                             type="submit"
                             bg="blue.600"
