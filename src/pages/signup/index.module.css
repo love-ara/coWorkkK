@@ -47,7 +47,7 @@
     padding-top: 30px;
     padding-left: 40px;
     padding-right: 40px;
-    height: 380px;
+    height: 420px;
     flex-direction: column;
     background-color: white;
     position: absolute;
@@ -78,7 +78,7 @@
     padding: 5px 10px 5px 10px;
     border-radius: 5px;
     border-style: none;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-family: "Montserrat", sans-serif;
     font-size: 14px;
     font-weight: 500;
@@ -125,7 +125,7 @@
     color: rgb(122, 111, 190);
     font-family: "Montserrat", sans-serif;
     font-size: 12px;
-    margin-top: 28px;
+    margin-top: 25px;
     text-align: center;
 }
 
@@ -140,3 +140,15 @@
     text-align: center;
     bottom: 50%;
 }
+
+.signIn {
+    font-weight: 600;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
