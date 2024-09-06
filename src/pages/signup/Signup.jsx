@@ -7,6 +7,7 @@ import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import {useState} from "react";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 
 const Signup = ()=> {
@@ -139,7 +140,8 @@ const Signup = ()=> {
 
                         )}
                     </Formik>
-                    <p className={style.haveAccount}>Already have an account? &nbsp;<span className={style.signIn}>Sign in</span></p>
+                    {/*<p className={style.haveAccount}>Already have an account? &nbsp;<span className={style.signIn}><Link>Sign in</span></p>*/}
+                    <Link  className={style.haveAccount} to='/login'>Already have an account?  Sign in</Link>
                 </div>
 
                 <p className={style.oneApp}>One single app,<br/>an entire ecosystem</p>

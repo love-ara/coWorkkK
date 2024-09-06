@@ -5,6 +5,7 @@ import backgroundLogo from "../../assets/signuppageassets/background-logo.png"
 import logo from "../../assets/signuppageassets/Taskiro.png"
 import {Field, Form, Formik} from "formik";
 import * as Yup from "yup";
+import {Link} from "react-router-dom";
 
 
 const Login = ()=> {
@@ -62,7 +63,7 @@ const Login = ()=> {
                             <button className={style.signupButton}>Login</button>
                         </Form>
                     </Formik>
-                    <p  className={style.haveAccount}>&#10229; &nbsp; Do not have an account? Sign up</p>
+                    <Link  className={style.haveAccount} to='/signup'>Do not have an account? Sign up</Link>
                 </div>
 
                 <p className={style.oneApp}>One single app,<br/>an entire ecosystem</p>
