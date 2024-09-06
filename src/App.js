@@ -4,7 +4,6 @@ import {ReactKeycloakProvider} from "@react-keycloak/web";
 import keycloak from "./keycloak";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
-import HomePage from "./pages/HomePage";
 import Auth from "./pages/auth/Auth";
 import CreateProject from "./pages/createProject/CreateProject";
 import CreateTask from "./pages/createTask/CreateTask";
@@ -13,6 +12,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import NewLandingPage from "./pages/landingPage/LandingPage"
 import Signup from "./pages/signup/Signup";
 import Login from "./pages/login/Login";
+import Home from "./pages/homePage";
 
 
 
@@ -32,9 +32,9 @@ function App() {
                     <Route
                         path="/dashboard"
                         element={
-                            <PrivateRoute>
-                                <HomePage />
-                            </PrivateRoute>
+                            // <PrivateRoute>
+                                <Home />
+                            // </PrivateRoute>
                         }
                     />
                     <Route
