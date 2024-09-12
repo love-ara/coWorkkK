@@ -10,6 +10,7 @@ import NewLandingPage from "./pages/landingPage/LandingPage"
 import Signup from "./pages/signup/Signup";
 import Login from "./pages/login/Login";
 import Home from "./pages/homepage";
+import Calendar from "./components/calendar";
 
 
 
@@ -20,15 +21,14 @@ function App() {
                 <Routes>
                     <Route path="/" element={<NewLandingPage />} />
                     <Route path="/home" element={<NewLandingPage />} />
-                    {/*<Route path="/newpage" element={<NewLandingPage />}/>*/}
                     <Route path="/signup" element={<Signup />}/>
                     <Route path="/login" element={<Login />}/>
                     <Route
                         path="/dashboard"
                         element={
-                            // <PrivateRoute>
+                            <PrivateRoute>
                                 <Home />
-                            // </PrivateRoute>
+                            </PrivateRoute>
                         }
                     />
                     <Route
@@ -55,10 +55,17 @@ function App() {
                             </PrivateRoute>
                         }
                     />
+                    <Route
+                        path="/calendar"
+                        element={
+                            <PrivateRoute>
+                                <Calendar />
+                            </PrivateRoute>
+                        }
+                    />
 
                 </Routes>
             </Router>
-        // </ReactKeycloakProvider>
     );
 }
 

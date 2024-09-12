@@ -5,6 +5,7 @@ import SideBar from "../../components/sidebar";
 import Header from "../../components/header";
 import { createProject } from "../../api/ProjectService";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 
 const CreateProject = () => {
@@ -27,7 +28,8 @@ const CreateProject = () => {
 
     const handleSubmit = async (values, { setSubmitting, setErrors }) => {
         try {
-            await createProject(values);
+            const response = await axios.post("http://3.211.174.23/localhost:8080/api/projects"
+                , values);
 
         } catch (error) {
             setErrors({ server: "Failed to create project" });

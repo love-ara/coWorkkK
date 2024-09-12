@@ -36,6 +36,13 @@ const Login = ()=> {
                 values
             );
 
+            const userData = response.data.user;
+            const token = response.data.token;
+
+            // Save user data and token in local storage or global state
+            localStorage.setItem('user', JSON.stringify(userData));
+            localStorage.setItem('token', token);
+
             if (response.status === 200 || response.status === 201) {
                 // Successful login
                 navigate("/dashboard"); // Navigate to the dashboard

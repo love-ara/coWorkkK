@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import {
     MdHome,
@@ -8,18 +8,16 @@ import {
     MdPerson,
     MdAdd, MdChat
 } from "react-icons/md";
-import user from "../assets/defaultAvatar.png";
+import userImage from "../assets/defaultAvatar.png";
 import { useNavigate } from "react-router-dom";
+import {UserContext} from "../context/UserContext";
 
 
 const SideBar = () => {
     const [isOpen, setIsOpen] = useState(true);
     const isMobile = window.innerWidth <= 768;
-
+    const { user } = useContext(UserContext);
     const navigate = useNavigate();
-    const handleAI = () => {
-        window.location.href = "https://cowork-ai-repo.onrender.com";
-    }
 
     const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -31,7 +29,25 @@ const SideBar = () => {
         return () => clearInterval(timer);
     }, []);
 
+    const handleAI = () => {
+        window.location.href = "https://cowork-ai-repo.onrender.com";
+    };
+    const createProject = () => {
+        navigate("/createproject");
+    };
+
+    const viewCalendar = () => {
+        navigate("/calendar");
+    };
+
     const toggleSidebar = () => setIsOpen(!isOpen);
+
+    if (!user) {
+        return <div>Loading...</div>;
+    }
+
+    const userName = user?.name || 'Anonymous';
+    const userAvatar = user?.avatar || userImage;
 
     const styles = {
         sider: {
@@ -139,23 +155,23 @@ const SideBar = () => {
 
                     <div style={styles.imageContainer}>
                         <div style={styles.topColor}>
-                            <img src={user} alt='User' style={styles.image} />
+                            <img src={userAvatar} alt='User' style={styles.image} />
                         </div>
                         <div style={styles.bottomColor}>
                             <div style={{display: "flex", flexDirection:
                                     "column", justifyContent: "center", alignItems: "center"}}>
-                                <h3 style={{color: "white"}}>Theo G.</h3>
-                                <p style={{color: "whitesmoke", marginTop: "0px"}}>FullStack Developer</p>
+                                <h3 style={{color: "white"}}>{userName}</h3>
+                                <p style={{color: "whitesmoke", marginTop: "0px"}}>{user.position || 'Member'}</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <Menu style={{color: "#2b2b4e"}}>
-                    <MenuItem icon={<MdHome />} active>Home</MenuItem>
-                    <MenuItem icon={<MdFolder />}>Projects</MenuItem>
+                    <MenuItem icon={<MdHome />} onClick={()=> navigate("/dashboard")}>Home</MenuItem>
+                    <MenuItem icon={<MdFolder />} onClick={createProject}>Projects</MenuItem>
                     <MenuItem icon={<MdCheckCircle />}>Tasks</MenuItem>
-                    <MenuItem  Link to="/calendar"  icon={<MdCalendarToday />}>Agenda</MenuItem>
+                    <MenuItem icon={<MdCalendarToday />} onClick={viewCalendar}>Agenda</MenuItem>
                     <MenuItem icon={<MdPerson />}>Contacts</MenuItem>
                     <MenuItem icon={<MdChat/>} onClick={handleAI}> Cowork AI</MenuItem>
 
