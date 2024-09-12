@@ -1,13 +1,27 @@
 import style from "./index.module.css"
-import backgroundDesign from "../../signuppageassets/background-design.png"
-import backgroundCover from "../../signuppageassets/background-cover.png"
-import backgroundLogo from "../../signuppageassets/background-logo.png"
-import logo from "../../signuppageassets/Taskiro.png"
+import backgroundDesign from "../../assets/signuppageassets/background-design.png"
+import backgroundCover from "../../assets/signuppageassets/background-cover.png"
+import backgroundLogo from "../../assets/signuppageassets/background-logo.png"
+import logo from "../../assets/signuppageassets/Taskiro.png"
 import {Field, Form, Formik} from "formik";
 import * as Yup from "yup";
+import {Link} from "react-router-dom";
 
 
 const Login = ()=> {
+
+    const initialValues = {
+        email: "",
+        password: "",
+    }
+
+    const validationSchema = Yup.object().shape({
+        email: Yup.string()
+            .required("Email is a required field!")
+            .email("Invalid email format!"),
+        password: Yup.string()
+            .required("Password is a required field!"),
+    });
 
     return (
         <>
@@ -17,9 +31,17 @@ const Login = ()=> {
                 <img src={backgroundLogo} alt={"Background logo"} className={style.backgroundLogo}/>
                 <div className={style.modal}>
                     <div className={style.companyLogo}>
-                        <img src={logo} alt={"Company Logo"}/>
+                        {/*<img src={logo} alt={"Company Logo"}/>*/}
+                        <p style={{
+                            color: "black",
+                            fontSize: "25px",
+                            fontFamily: "Montserrat",
+                            fontWeight: "700"
+                        }}>Co<span style={{
+                            color: "rgb(122, 111, 190)"
+                        }}>workk</span></p>
                     </div>
-                    <Formik>
+                    <Formik initialValues={initialValues} validationSchema={validationSchema}>
                         <Form className={style.signupForm}>
                             <label className={style.labelTag} htmlFor={"email"}>Email:</label>
                             <Field
@@ -31,7 +53,7 @@ const Login = ()=> {
 
                             <label className={style.labelTag} htmlFor={"password"}>Password:</label>
                             <Field
-                                style={{marginBottom : "25px"}}
+                                style={{marginBottom : "32px"}}
                                 className={style.formField}
                                 type="password"
                                 id="password"
@@ -41,7 +63,7 @@ const Login = ()=> {
                             <button className={style.signupButton}>Login</button>
                         </Form>
                     </Formik>
-                    <p className={style.haveAccount}>&#10229; &nbsp; Do not have an account ?</p>
+                    <Link  className={style.haveAccount} to='/signup'>Do not have an account? Sign up</Link>
                 </div>
 
                 <p className={style.oneApp}>One single app,<br/>an entire ecosystem</p>

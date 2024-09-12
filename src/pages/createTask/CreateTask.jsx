@@ -1,11 +1,11 @@
 import style from "./index.module.css"
-import Sidebar from "../../components/sidebar/SideBar";
-import  TaskHeader from "../../components/taskHeader";
+import Sidebar from "../../components/sidebar";
+import Header from "../../components/header";
 
 const CreateTask = () => {
     return (
         <>
-            <TaskHeader />
+            <Header />
             <Sidebar />
             <div className={style.backgroundCover}>
 

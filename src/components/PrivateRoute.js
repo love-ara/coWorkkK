@@ -1,11 +1,11 @@
 import React from 'react';
-import { useKeycloak } from '@react-keycloak/web';
 import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({ children }) => {
-    const { keycloak } = useKeycloak();
-
-    return keycloak.authenticated ? children : <Navigate to="/auth" />;
+return(
+    <>
+    <Navigate to="/"></Navigate></>
+)
 };
 
 export default PrivateRoute;
