@@ -1,7 +1,5 @@
 import React from 'react';
 import './App.css';
-import {ReactKeycloakProvider} from "@react-keycloak/web";
-import keycloak from "./keycloak";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import CreateProject from "./pages/createProject/CreateProject";
@@ -16,10 +14,8 @@ import Home from "./pages/homepage";
 
 
 function App() {
-    const initOptions = { pkceMethod: 'S256' };
 
     return (
-        // <ReactKeycloakProvider authClient={keycloak} initOptions={initOptions}>
             <Router>
                 <Routes>
                     <Route path="/" element={<NewLandingPage />} />
