@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Menu, SubMenu } from "react-pro-sidebar";
 import AddReminder from './forms/addReminder';
 
 const Cal = () => {
