@@ -24,32 +24,42 @@ const CreateProject = () => {
     const validationSchema = Yup.object({
         title: Yup.string().required("Title is required"),
         description: Yup.string().required("Description is required"),
-        startDate: Yup.date().required("Start date is required"),
-        dueDate: Yup.date().required("Due date is required"),
         tags: Yup.array().of(Yup.string()).required("At least one tag is required"),
         category: Yup.string().required("Category is required")
     });
 
     const handleSubmit = async (values, { setSubmitting, setErrors }) => {
         try {
+            // Retrieve the token from localStorage or your authentication mechanism
+            const token = localStorage.getItem('token');
+
             const response = await axios.post(
-                "http://3.211.174.23:8080/api/projects",
+                "http://3.211.174.23/api/projects",
                 {
                     name: values.title,
                     description: values.description,
                     tags: values.tags,
-                    category: values.category
+                    category: values.category,
+
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
                 }
             );
 
             console.log(response.data);
             navigate('/dashboard');
         } catch (error) {
+            console.error("Error creating project:", error);
             setErrors({ server: "Failed to create project" });
         } finally {
             setSubmitting(false);
         }
     };
+
 
     const handleCancel = () => {
         navigate('/dashboard');
@@ -71,15 +81,15 @@ const CreateProject = () => {
                     >
                         {({isSubmitting, values, setFieldValue}) => (
                             <Form>
-                                <label className={style.textLabel} htmlFor="title">Title:</label>
+                                <label className={style.textLabel} htmlFor="name">Title:</label>
                                 <Field
                                     className={style.title}
                                     type="text"
-                                    id="title"
-                                    name="title"
+                                    id="name"
+                                    name="name"
                                     placeholder="Title"
                                 />
-                                <ErrorMessage name="title" component="div" className={style.error}/>
+                                <ErrorMessage name="name" component="div" className={style.error}/>
 
                                 <label className={style.textLabel} htmlFor="description">Description:</label>
                                 <Field
@@ -91,23 +101,6 @@ const CreateProject = () => {
                                 />
                                 <ErrorMessage name="description" component="div" className={style.error}/>
 
-                                <label className={style.textLabel} htmlFor="startDate">Start Date:</label>
-                                <Field
-                                    className={style.dates}
-                                    type="datetime-local"
-                                    id="startDate"
-                                    name="startDate"
-                                />
-                                <ErrorMessage name="startDate" component="div" className={style.error}/>
-
-                                <label className={style.textLabel} htmlFor="dueDate">Due Date:</label>
-                                <Field
-                                    className={style.dates}
-                                    type="datetime-local"
-                                    id="dueDate"
-                                    name="dueDate"
-                                />
-                                <ErrorMessage name="dueDate" component="div" className={style.error}/>
 
                                 <label className={style.textLabel} htmlFor="tags">Tags:</label>
                                 <Field as="select" id="tags" name="tags" multiple className={style.tags}>
