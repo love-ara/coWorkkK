@@ -3,22 +3,10 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import style from "./index.module.css";
 import SideBar from "../../components/sidebar";
-import Header from "../../components/header";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const tagOptions = ["angular", "node", "react", "vue", "javascript"];
-
-//if we are retrieving
-// const fetchTags = async () => {
-//     try {
-//         const response = await axios.get("http://3.211.174.23:8080/api/tags");
-//         return response.data; // Assuming API returns an array of tags
-//     } catch (error) {
-//         console.error("Failed to fetch tags", error);
-//         return []; // Return empty array on error
-//     }
-// };
 
 const CreateProject = () => {
     const navigate = useNavigate();
@@ -53,9 +41,9 @@ const CreateProject = () => {
                     category: values.category
                 }
             );
-            // Handle successful response
+
             console.log(response.data);
-            navigate('/dashboard'); // Redirect after successful creation
+            navigate('/dashboard');
         } catch (error) {
             setErrors({ server: "Failed to create project" });
         } finally {
@@ -69,18 +57,19 @@ const CreateProject = () => {
 
     return (
         <>
-            <Header />
-            <SideBar />
-            <div className={style.backgroundCover}>
+            <div className={style.pageContainer}>
+                <SideBar/>
+
+            <div className={style.formContainer}>
                 <div className={style.createProject}>
                     <p className={style.header}>Create Project</p>
-                    <hr className={style.horizontalLine} />
+                    <hr className={style.horizontalLine}/>
                     <Formik
                         initialValues={initialValues}
                         validationSchema={validationSchema}
                         onSubmit={handleSubmit}
                     >
-                        {({ isSubmitting, values, setFieldValue }) => (
+                        {({isSubmitting, values, setFieldValue}) => (
                             <Form>
                                 <label className={style.textLabel} htmlFor="title">Title:</label>
                                 <Field
@@ -90,7 +79,7 @@ const CreateProject = () => {
                                     name="title"
                                     placeholder="Title"
                                 />
-                                <ErrorMessage name="title" component="div" className={style.error} />
+                                <ErrorMessage name="title" component="div" className={style.error}/>
 
                                 <label className={style.textLabel} htmlFor="description">Description:</label>
                                 <Field
@@ -100,7 +89,7 @@ const CreateProject = () => {
                                     name="description"
                                     placeholder="Project Description"
                                 />
-                                <ErrorMessage name="description" component="div" className={style.error} />
+                                <ErrorMessage name="description" component="div" className={style.error}/>
 
                                 <label className={style.textLabel} htmlFor="startDate">Start Date:</label>
                                 <Field
@@ -109,7 +98,7 @@ const CreateProject = () => {
                                     id="startDate"
                                     name="startDate"
                                 />
-                                <ErrorMessage name="startDate" component="div" className={style.error} />
+                                <ErrorMessage name="startDate" component="div" className={style.error}/>
 
                                 <label className={style.textLabel} htmlFor="dueDate">Due Date:</label>
                                 <Field
@@ -118,7 +107,7 @@ const CreateProject = () => {
                                     id="dueDate"
                                     name="dueDate"
                                 />
-                                <ErrorMessage name="dueDate" component="div" className={style.error} />
+                                <ErrorMessage name="dueDate" component="div" className={style.error}/>
 
                                 <label className={style.textLabel} htmlFor="tags">Tags:</label>
                                 <Field as="select" id="tags" name="tags" multiple className={style.tags}>
@@ -126,7 +115,7 @@ const CreateProject = () => {
                                         <option key={tag} value={tag}>{tag}</option>
                                     ))}
                                 </Field>
-                                <ErrorMessage name="tags" component="div" className={style.error} />
+                                <ErrorMessage name="tags" component="div" className={style.error}/>
 
                                 <label className={style.textLabel} htmlFor="category">Category:</label>
                                 <Field
@@ -136,7 +125,7 @@ const CreateProject = () => {
                                     name="category"
                                     placeholder="Category"
                                 />
-                                <ErrorMessage name="category" component="div" className={style.error} />
+                                <ErrorMessage name="category" component="div" className={style.error}/>
 
                                 <button
                                     className={style.cancelButton}
@@ -157,7 +146,9 @@ const CreateProject = () => {
                     </Formik>
                 </div>
             </div>
+            </div>
         </>
+
     );
 };
 

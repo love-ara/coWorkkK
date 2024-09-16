@@ -1,48 +1,53 @@
+/*.container{*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    flex: 1;*/
+/*}*/
+/*.backgroundDesign {*/
+/*    background-color: rgba(0, 0, 0, 0.5);*/
+/*    position: fixed;*/
+/*    left: 0;*/
+/*    bottom: 0;*/
+/*    top: 0;*/
+/*    right: 0;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    border-style: none;*/
+/*}*/
 
-.backgroundDesign {
-    background-color: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    top: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-style: none;
-}
+/*.horizontalLine {*/
+/*    width: 128px;*/
+/*    height: 3px;*/
+/*    margin-bottom: 10px;*/
+/*    margin-top: 1px;*/
+/*    background-color: white;*/
+/*    !*border-radius: 6px;*!*/
+/*}*/
 
-.horizontalLine {
-    width: 128px;
-    height: 3px;
-    margin-bottom: 10px;
-    margin-top: 1px;
-    background-color: white;
-    /*border-radius: 6px;*/
-}
+/*.createProject {*/
+/*    background-color: rgb(131, 181, 170);*/
+/*    border-radius: 7px;*/
+/*    width: 320px;*/
+/*    height: 450px;*/
+/*    padding: 20px;*/
+/*    border-style: solid;*/
+/*    !*border-width: 6px;*!*/
+/*}*/
 
-.createProject {
-    background-color: rgb(131, 181, 170);
-    border-radius: 7px;
-    width: 320px;
-    height: 450px;
-    padding: 20px;
-    border-style: solid;
-    /*border-width: 6px;*/
-}
+/*.header {*/
+/*    font-weight: 700;*/
+/*    font-size: 18px;*/
+/*    margin-bottom: 2px;*/
+/*    color: #5a5a5a;*/
+/*}*/
 
-.header {
-    font-weight: 700;
-    font-size: 18px;
-    margin-bottom: 2px;
-    color: #5a5a5a;
-}
-
-.textLabel {
-    color: white;
-    font-weight: 500;
-    font-size: 12px;
-}
+/*.textLabel {*/
+/*    color: white;*/
+/*    font-weight: 500;*/
+/*    font-size: 12px;*/
+/*}*/
 
 .title {
     display: block;
@@ -66,27 +71,27 @@
     font-size: 13px;
 }
 
-.description {
-    display: block;
-    background-color: white;
-    border-radius: 3px;
-    border-color: rgb(204, 204, 204);
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    width: 270px;
-    height: 75px;
-    font-size: 13px;
-    border-style: solid;
-    border-width: 2px;
-    margin-bottom: 5px;
-}
+/*.description {*/
+/*    display: block;*/
+/*    background-color: white;*/
+/*    border-radius: 3px;*/
+/*    border-color: rgb(204, 204, 204);*/
+/*    padding-top: 5px;*/
+/*    padding-bottom: 5px;*/
+/*    padding-left: 5px;*/
+/*    padding-right: 5px;*/
+/*    width: 270px;*/
+/*    height: 75px;*/
+/*    font-size: 13px;*/
+/*    border-style: solid;*/
+/*    border-width: 2px;*/
+/*    margin-bottom: 5px;*/
+/*}*/
 
-.description::placeholder {
-    color: #b8b5b5;
-    font-size: 13px;
-}
+/*.description::placeholder {*/
+/*    color: #b8b5b5;*/
+/*    font-size: 13px;*/
+/*}*/
 
 .dates {
     display: block;
@@ -104,84 +109,148 @@
     border-width: 2px;
 }
 
-input[type="datetime-local"] {
-    color: #676666;
-    font-size: 13px;
+/*input[type="datetime-local"] {*/
+/*    color: #676666;*/
+/*    font-size: 13px;*/
+/*}*/
+
+/*input[type="datetime-local"]:focus {*/
+/*    color: #101010;*/
+/*    font-size: 13px;*/
+/*}*/
+
+
+/*.cancelButton {*/
+/*    border-radius: 4px;*/
+/*    padding-left: 20px;*/
+/*    padding-right: 20px;*/
+/*    padding-top: 8px;*/
+/*    padding-bottom: 8px;*/
+/*    border-width: 2px;*/
+/*    border-color: white;*/
+/*    color: white;*/
+/*    font-size: 15px;*/
+/*    transition: padding 0.3s ease;*/
+/*}*/
+
+/*.cancelButton:hover {*/
+/*    padding-left: 24px; !* Increase left padding *!*/
+/*    padding-right: 24px; !* Increase right padding *!*/
+/*    padding-top: 10px; !* Increase top padding *!*/
+/*    padding-bottom: 10px; !* Increase bottom padding *!*/
+/*}*/
+
+
+/*.createProjectButton {*/
+/*    border-radius: 4px;*/
+/*    background-color: white;*/
+/*    padding-left: 20px;*/
+/*    padding-right: 20px;*/
+/*    padding-top: 8px;*/
+/*    padding-bottom: 8px;*/
+/*    color: rgb(131, 181, 170);*/
+/*    border-style: solid;*/
+/*    border-width: 2px;*/
+/*    border-color: white;*/
+/*    float: right;*/
+/*    font-size: 15px;*/
+/*    transition: padding 0.3s;*/
+/*}*/
+
+/*.createProjectButton:hover {*/
+/*    padding-left: 24px; !* Increase left padding *!*/
+/*    padding-right: 24px; !* Increase right padding *!*/
+/*    padding-top: 10px; !* Increase top padding *!*/
+/*    padding-bottom: 10px; !* Increase bottom padding *!*/
+/*}*/
+
+
+/*@keyframes growLine {*/
+/*    from {*/
+/*        width: 0;*/
+/*    }*/
+/*    to {*/
+/*        width: 128px;*/
+/*    }*/
+/*}*/
+
+/*.horizontalLine {*/
+/*    animation: growLine 1s ease-in-out;*/
+/*}*/
+
+/*@keyframes fadeIn {*/
+/*    from {*/
+/*        opacity: 0;*/
+/*    }*/
+/*    to {*/
+/*        opacity: 1;*/
+/*    }*/
+/*}*/
+
+/*.backgroundDesign {*/
+/*    animation: fadeIn 0.5s ease-in;*/
+/*}*/
+
+    .pageContainer {
+        display: flex;
+        flex-direction: row; /* Ensure elements are placed horizontally */
+        height: 100vh; /* Full viewport height */
+    }
+
+    .SideBar {
+        flex: 0 0 200px; /* Fixed width for the sidebar */
+        background-color: #2c3e50; /* Example background color */
+        height: 100%; /* Full height for the sidebar */
+    }
+
+    .formContainer {
+        flex: 1; /* Takes up remaining space */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+
+.formContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-input[type="datetime-local"]:focus {
-    color: #101010;
-    font-size: 13px;
-}
-
-
-.cancelButton {
-    border-radius: 4px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    border-width: 2px;
-    border-color: white;
-    color: white;
-    font-size: 15px;
-    transition: padding 0.3s ease;
-}
-
-.cancelButton:hover {
-    padding-left: 24px; /* Increase left padding */
-    padding-right: 24px; /* Increase right padding */
-    padding-top: 10px; /* Increase top padding */
-    padding-bottom: 10px; /* Increase bottom padding */
-}
-
-
-.createProjectButton {
-    border-radius: 4px;
-    background-color: white;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    color: rgb(131, 181, 170);
+.createProject {
+    background-color: rgb(131, 181, 170);
+    border-radius: 7px;
+    width: 320px;
+    height: 450px;
+    padding: 20px;
     border-style: solid;
-    border-width: 2px;
-    border-color: white;
-    float: right;
-    font-size: 15px;
-    transition: padding 0.3s;
-}
-
-.createProjectButton:hover {
-    padding-left: 24px; /* Increase left padding */
-    padding-right: 24px; /* Increase right padding */
-    padding-top: 10px; /* Increase top padding */
-    padding-bottom: 10px; /* Increase bottom padding */
-}
-
-
-@keyframes growLine {
-    from {
-        width: 0;
-    }
-    to {
-        width: 128px;
-    }
 }
 
 .horizontalLine {
-    animation: growLine 1s ease-in-out;
+    width: 128px;
+    height: 3px;
+    margin-bottom: 10px;
+    margin-top: 1px;
+    background-color: white;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+.textLabel {
+    color: white;
+    font-weight: 500;
+    font-size: 12px;
 }
 
-.backgroundDesign {
-    animation: fadeIn 0.5s ease-in;
+.error {
+    color: red;
+    font-size: 12px;
 }
+
+.cancelButton,
+.createProjectButton {
+    margin-top: 10px;
+}
+
+
