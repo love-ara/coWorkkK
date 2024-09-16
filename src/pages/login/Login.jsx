@@ -2,15 +2,18 @@ import style from "./index.module.css"
 import backgroundDesign from "../../assets/signuppageassets/background-design.png"
 import backgroundCover from "../../assets/signuppageassets/background-cover.png"
 import backgroundLogo from "../../assets/signuppageassets/background-logo.png"
-import logo from "../../assets/signuppageassets/Taskiro.png"
+// import logo from "../../assets/signuppageassets/Taskiro.png"
 import {Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import axios from "axios";
+import {useAuth} from "../../context/AuthContext";
 
 
 const Login = ()=> {
+    const { saveToken } = useAuth();
+
     const [loginError, setLoginError] = useState(null);
     const navigate = useNavigate();
 
@@ -30,22 +33,17 @@ const Login = ()=> {
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
             setLoginError(null);
+            const response = await axios.post("http://3.211.174.23/auth/sign_in",
+                values);
 
-            const response = await axios.post(
-                "http://3.211.174.23/auth/sign_in",
-                values
-            );
-
-            const userData = response.data.user;
-            const token = response.data.token;
-
-            // Save user data and token in local storage or global state
-            localStorage.setItem('user', JSON.stringify(userData));
-            localStorage.setItem('token', token);
-
+            console.log("data: ", response.data)
+            console.log("res: ", response)
             if (response.status === 200 || response.status === 201) {
-                // Successful login
-                navigate("/dashboard"); // Navigate to the dashboard
+                const { jwtToken: token, fullName: name, email: email, id: id } = response.data;
+
+                saveToken(token, { name, email, id });
+                console.log("user: ", email)
+                navigate("/dashboard", {replace: true});
             } else {
                 setLoginError("Invalid credentials. Please try again.");
             }
@@ -60,7 +58,7 @@ const Login = ()=> {
     return (
         <>
             <div className={style.page}>
-                <img src={backgroundDesign} alt={"Background image"} className={style.backgroundDesign} />
+                <img src={backgroundDesign} alt={"Background "} className={style.backgroundDesign} />
                 <img src={backgroundCover} alt={"Background cover"} className={style.backgroundCover} />
                 <img src={backgroundLogo} alt={"Background logo"} className={style.backgroundLogo}/>
                 <div className={style.modal}>

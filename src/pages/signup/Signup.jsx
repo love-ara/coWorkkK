@@ -7,9 +7,12 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
+import {useAuth} from "../../context/AuthContext";
 
 const Signup = () => {
+    const { saveToken } = useAuth();
+
     const [submitStatus, setSubmitStatus] = useState(null);
     const navigate = useNavigate();
 
@@ -27,22 +30,28 @@ const Signup = () => {
             .min(2, "First name must be at least 2 characters")
             .required("Full name is required"),
         password: Yup.string()
-            .min(8, "Password must be at least 8 characters")
+            .min(3, "Password must be at least 8 characters")
             .required("Password is required"),
     });
 
-    // Form submission handler
+
     const handleSubmit = async (values, { setSubmitting, resetForm }) => {
         try {
-            setSubmitStatus(null);
             const response = await axios.post("http://3.211.174.23/auth/sign_up", values);
 
+            console.log("res-->", response)
             if (response.status === 200 || response.status === 201) {
+                const { jwtToken: token, fullName: name, email: email, id: id } = response.data;
+
+                saveToken(token, { name, email, id });
                 setSubmitStatus({ success: "Signup successful!" });
                 resetForm();
-                navigate("/dashboard"); // Navigate to dashboard upon success
+                navigate("/dashboard", { replace: true });
+            } else if (response.status === 400) {
+                setSubmitStatus({ error: "User already exists" });
+                resetForm();
             } else {
-                setSubmitStatus({ error: response.data.response || "Something went wrong. Please try again." });
+                setSubmitStatus({ error: response.data?.message || "Something went wrong. Please try again." });
             }
         } catch (error) {
             setSubmitStatus({ error: error.response?.data?.message || "An error occurred during signup." });
@@ -50,6 +59,9 @@ const Signup = () => {
             setSubmitting(false);
         }
     };
+
+
+
 
     return (
         <>
