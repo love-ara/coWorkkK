@@ -39,9 +39,17 @@ const Login = ()=> {
             console.log("data: ", response.data)
             console.log("res: ", response)
             if (response.status === 200 || response.status === 201) {
-                const { jwtToken: token, fullName: name, email: email, id: id } = response.data;
+                const { jwtToken: token } = response.data;
+                saveToken(token);
 
-                saveToken(token, { name, email, id });
+                const userResponse = await axios.get("http://3.211.174.23/api/profile", {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+
+                console.log("user res: ",userResponse)
+                const { fullName: name, email } = userResponse.data;
+                localStorage.setItem('username', name);
+
                 console.log("user: ", email)
                 navigate("/dashboard", {replace: true});
             } else {
@@ -53,6 +61,8 @@ const Login = ()=> {
             setSubmitting(false);
         }
     };
+
+
 
 
     return (
