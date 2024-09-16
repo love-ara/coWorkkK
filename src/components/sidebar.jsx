@@ -9,7 +9,6 @@ import {
     MdAdd, MdChat
 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import {useAuth} from "../context/AuthContext";
 import userImage from '../assets/defaultAvatar.png';
 
 
@@ -17,7 +16,6 @@ const SideBar = () => {
     const [isOpen, setIsOpen] = useState(true);
     const isMobile = window.innerWidth <= 768;
     const navigate = useNavigate();
-    const { authState } = useAuth();
 
     const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -46,10 +44,7 @@ const SideBar = () => {
 
 
 
-    console.log("auth state===", authState)
-    const user = authState[0];
-
-    const userName = user?.name || 'Anonymous';
+    const userName = localStorage.getItem('username');
     // const userAvatar = authState.token?.avatar || {userImage};
     const userAvatar = {userImage};
 
@@ -143,6 +138,8 @@ const SideBar = () => {
             zIndex: 0,
         }
     };
+
+
 
     const squareColors = ['#f4cd80', '#f48080', '#80d9f4', '#c180f4', '#80d2f4'];
 
