@@ -1,72 +1,89 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+
+
+import { useLocation } from 'react-router-dom';
 import AddReminder from './forms/addReminder';
 
 const Cal = () => {
+    const location = useLocation();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [reminders, setReminders] = useState({});
-    const [currentWeek, setCurrentWeek] = useState(0);
     const [showAddReminder, setShowAddReminder] = useState(false);
     const [selectedDay, setSelectedDay] = useState(null);
 
+    const isDetailedView = location.pathname === '/calendar';
+
+    useEffect(() => {
+        setSelectedDate(new Date());
+    }, [location.pathname]);
+
     const handleMonthChange = (event) => {
-        const year = new Date().getFullYear();
-        const month = parseInt(event.target.value);
-        const newDate = new Date(year, month, 1);
-        setSelectedDate(newDate);
-        setCurrentWeek(0);
+        const year = selectedDate.getFullYear();
+        const month = parseInt(event.target.value, 10);
+        setSelectedDate(new Date(year, month, 1));
     };
 
-    const getCurrentWeekDays = () => {
-        const current = selectedDate;
-        const dayOfWeek = current.getDay();
-        const startOfWeek = new Date(current);
-        startOfWeek.setDate(current.getDate() - dayOfWeek);
+    const handleYearChange = (event) => {
+        const year = parseInt(event.target.value, 10);
+        setSelectedDate(new Date(year, selectedDate.getMonth(), 1));
+    };
 
-        let days = [];
-        for (let i = 0; i < 7; i++) {
-            const day = new Date(startOfWeek);
-            day.setDate(startOfWeek.getDate() + i);
-            days.push(day);
+    const getDaysInMonth = (date) => {
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        const days = [];
+        const startOfMonth = new Date(year, month, 1);
+        const endOfMonth = new Date(year, month + 1, 0);
+        let day = startOfMonth;
+
+        while (day <= endOfMonth) {
+            days.push(new Date(day));
+            day.setDate(day.getDate() + 1);
         }
         return days;
     };
 
-    const handleAddReminder = (day) => {
-        setSelectedDay(day);
-        setShowAddReminder(true);
-    };
+    const getCalendarHeader = () => (
+        <div style={styles.header}>
+            <button style={styles.arrowButton} onClick={() =>
+                setSelectedDate(new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1, 1))}>
+                &#8593;
+            </button>
+            <button style={styles.arrowButton} onClick={() =>
+                setSelectedDate(new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1, 1))}>
+                &#8595;
+            </button>
+            <select style={styles.select} value={selectedDate.getMonth()} onChange={handleMonthChange}>
+                {Array.from({length: 12}, (_, index) => (
+                    <option key={index} value={index}>
+                        {new Date(2020, index, 1).toLocaleString('default', {month: 'long'})}
+                    </option>
+                ))}
+            </select>
+            <select style={styles.select} value={selectedDate.getFullYear()} onChange={handleYearChange}>
+                {Array.from({length: 10}, (_, index) => (
+                    <option key={index} value={2023 + index}>
+                        {2023 + index}
+                    </option>
+                ))}
+            </select>
 
-    const handleSaveReminder = (reminder) => {
-        setReminders((prevReminders) => ({
-            ...prevReminders,
-            [selectedDay.toDateString()]: reminder,
-        }));
-    };
+        </div>
+    );
 
     const renderDay = (day) => {
         const reminder = reminders[day.toDateString()];
         return (
             <div
                 key={day}
-                style={{
-                    // border: '1px dashed #ddd',
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-around",
-                    padding: '10px',
-                    margin: '5px',
-                    borderRadius: '8px',
-                    // backgroundColor: '#f9f9f9',
-                    textAlign: 'center',
-                    cursor: 'pointer',
-                    position: 'relative',
-                }}
+                style={styles.dayCell}
                 onClick={() => handleAddReminder(day)}
             >
-                <div style={{ fontSize: '20px', fontWeight: 'bold' }}>{day.getDate()}</div>
-                <div>{day.toLocaleString('default', { weekday: 'short' })}</div>
+                <div style={styles.dayNumber}>{day.getDate()}</div>
                 {reminder && (
-                    <div style={{ marginTop: '5px', fontSize: '12px' }}>
+                    <div style={styles.reminderInfo}>
                         <strong>{reminder.title}</strong>
                         <div>Start: {reminder.startDate}</div>
                         <div>End: {reminder.endDate}</div>
@@ -76,79 +93,58 @@ const Cal = () => {
         );
     };
 
-    const goToNextWeek = () => {
-        const nextWeekDate = new Date(selectedDate);
-        nextWeekDate.setDate(selectedDate.getDate() + 7);
-        setSelectedDate(nextWeekDate);
+    const calendarDays = () => {
+        const days = getDaysInMonth(selectedDate);
+        const startDay = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1).getDay();
+        const daysToShow = Array(startDay).fill(null).concat(days);
+
+        let rows = [];
+         while (daysToShow.length) {
+             rows.push(daysToShow.splice(0, 31));
+         }
+        return rows;
     };
 
-    const goToPrevWeek = () => {
-        const prevWeekDate = new Date(selectedDate);
-        prevWeekDate.setDate(selectedDate.getDate() - 7);
-        setSelectedDate(prevWeekDate);
-    };
+    const renderCalendar = () => (
+        <div style={styles.calendarContainer}>
 
-    const styles = {
-        calendarContainer: {
-            width: '100%',
-            maxWidth: '1000px',
-            height: '200px',
-            // margin: 'auto',
-            padding: '10px',
-            // boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-            background: "#ffffff",
-            borderRadius: '12px',
-            textAlign: 'center',
-        },
-        weekRow: {
-            display: 'flex',
-            justifyContent: 'space-around',
-            gap: '12px',
-            // flexWrap: 'wrap',
-        },
-        arrowButton: {
-            fontSize: '20px',
-            backgroundColor: 'transparent',
-            border: 'none',
-            cursor: 'pointer',
-        },
-        arrowContainer: {
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-        },
-        selects:{
-            padding: '0.5em 0.5em'
-        },
-
-    };
+            <div>
+                <Calendar />
+            </div>
+        </div>
+    );
 
     return (
-        <div style={styles.calendarContainer}>
-            <div>
-                        <select style={{border: "none", outline: "none"}} value={selectedDate.getMonth()} onChange={handleMonthChange}>
-                            {Array.from({ length: 12 }, (_, i) => (
-                                <option key={i} value={i}>
-                                    {new Date(2020, i, 1).toLocaleString('default', { month: 'long' })}
-                                </option>
-                            ))}
-                        </select>
-            </div>
+        <div>
+            {isDetailedView ? (
+                renderCalendar()
+            ) : (
+                <div style={styles.simpleCalendarContainer}>
+                    {getCalendarHeader()}
+                    {/*{calendarDays().slice(0, 1).map((week, index) => (*/}
+                    {/*    <div key={index} style={styles.weekRow}>*/}
+                    {/*        {week.map((day, dayIndex) => (*/}
+                    {/*            <div key={dayIndex} style={styles.simpleDayCell}>*/}
+                    {/*                {day ? renderDay(day) : <div style={styles.emptyDay}></div>}*/}
+                    {/*            </div>*/}
+                    {/*        ))*/}
+                    {/*        }*/}
+                    {/*    </div>*/}
+                    {/*))}*/}
 
-            <div style={styles.arrowContainer}>
-                <button style={styles.arrowButton} onClick={goToPrevWeek}>
-                    &lt;
-                </button>
-
-                <div style={styles.weekRow}>
-                    {getCurrentWeekDays().map((day) => renderDay(day))}
+                    {/*<div style={styles.gridContainer}>*/}
+                        {calendarDays().map((week, index) => (
+                            <div key={index} style={styles.weekRow}>
+                                {week.map((day, dayIndex) => (
+                                    <div key={dayIndex} style={styles.dayCell}>
+                                        {day ? renderDay(day) : <div style={styles.emptyDay}></div>}
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    {/*</div>*/}
                 </div>
-
-                <button style={styles.arrowButton} onClick={goToNextWeek}>
-                    &gt;
-                </button>
-            </div>
-
+            )}
             {showAddReminder && (
                 <AddReminder
                     day={selectedDay}
@@ -158,6 +154,105 @@ const Cal = () => {
             )}
         </div>
     );
+
+    function handleAddReminder(day) {
+        setSelectedDay(day);
+        setShowAddReminder(true);
+    }
+
+    function handleSaveReminder(reminder) {
+        setReminders(prevReminders => ({
+            ...prevReminders,
+            [selectedDay.toDateString()]: reminder,
+        }));
+    }
+};
+
+const styles = {
+    calendarContainer: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        alignContent: "center",
+        width: '100%',
+        // maxWidth: '1000px',
+        height: 'auto',
+        padding: '20px',
+        background: "#ffffff",
+        margin: "20px",
+        borderRadius: '12px',
+        textAlign: 'center',
+        overflow: 'hidden',
+    },
+    weekRow: {
+        display: 'flex',
+        // justifyContent: 'space-around',
+        gap: '12px',
+    },
+    arrowButton: {
+        fontSize: '20px',
+        backgroundColor: 'transparent',
+        border: 'none',
+        cursor: 'pointer',
+    },
+    arrowContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    select: {
+        margin: '0 10px',
+        border: "none"
+    },
+    // gridContainer: {
+    //     // display: 'grid',
+    //     // gridTemplateColumns: 'repeat(7, 1fr)',
+    //     gap: '5px',
+    // },
+    dayCell: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '10px',
+        margin: '5px',
+        // borderRadius: '8px',
+        // backgroundColor: '#f0f0f0',
+        cursor: 'pointer',
+        position: 'relative',
+    },
+    simpleDayCell: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '10px',
+        margin: '5px',
+        borderRadius: '8px',
+    },
+    dayNumber: {
+        fontSize: '20px',
+        fontWeight: 'bold',
+    },
+    reminderInfo: {
+        marginTop: '5px',
+        fontSize: '12px',
+    },
+    emptyDay: {
+        backgroundColor: '#e0e0e0',
+        height: '100px',
+    },
+    simpleCalendarContainer: {
+        width: '100%',
+        alignContent: "center",
+        // justifyContent: 'space-evenly',
+        // maxWidth: '1000px',
+        height: '200px',
+        // padding: '10px',
+        background: "#ffffff",
+        borderRadius: '12px',
+        // textAlign: 'center',
+        overflow: 'hidden',
+    },
 };
 
 export default Cal;

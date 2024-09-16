@@ -8,16 +8,16 @@ import {
     MdPerson,
     MdAdd, MdChat
 } from "react-icons/md";
-import userImage from "../assets/defaultAvatar.png";
 import { useNavigate } from "react-router-dom";
-import {UserContext} from "../context/UserContext";
+import {useAuth} from "../context/AuthContext";
+import userImage from '../assets/defaultAvatar.png';
 
 
 const SideBar = () => {
     const [isOpen, setIsOpen] = useState(true);
     const isMobile = window.innerWidth <= 768;
-    const { user } = useContext(UserContext);
     const navigate = useNavigate();
+    const { authState } = useAuth();
 
     const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -42,12 +42,16 @@ const SideBar = () => {
 
     const toggleSidebar = () => setIsOpen(!isOpen);
 
-    if (!user) {
-        return <div>Loading...</div>;
-    }
+
+
+
+
+    console.log("auth state===", authState)
+    const user = authState[0];
 
     const userName = user?.name || 'Anonymous';
-    const userAvatar = user?.avatar || userImage;
+    // const userAvatar = authState.token?.avatar || {userImage};
+    const userAvatar = {userImage};
 
     const styles = {
         sider: {
@@ -155,13 +159,14 @@ const SideBar = () => {
 
                     <div style={styles.imageContainer}>
                         <div style={styles.topColor}>
-                            <img src={userAvatar} alt='User' style={styles.image} />
+                            <img src={userImage} alt='user' style={styles.image} />
                         </div>
                         <div style={styles.bottomColor}>
                             <div style={{display: "flex", flexDirection:
                                     "column", justifyContent: "center", alignItems: "center"}}>
                                 <h3 style={{color: "white"}}>{userName}</h3>
-                                <p style={{color: "whitesmoke", marginTop: "0px"}}>{user.position || 'Member'}</p>
+
+                                <p style={{color: "whitesmoke", marginTop: "0px"}}>Member</p>
                             </div>
                         </div>
                     </div>
