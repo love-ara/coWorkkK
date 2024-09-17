@@ -56,7 +56,7 @@ const Login = ()=> {
                 setLoginError("Invalid credentials. Please try again.");
             }
         } catch (error) {
-            setLoginError(error.response?.data?.message || "Login failed. Please try again.");
+            setLoginError(error.response.data || "Login failed. Please try again.");
         } finally {
             setSubmitting(false);
         }
