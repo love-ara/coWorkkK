@@ -39,12 +39,21 @@ const Signup = () => {
         try {
             const response = await axios.post("http://3.211.174.23/auth/sign_up", values);
 
-            console.log("res-->", response)
-            if (response.status === 200 || response.status === 201) {
-                const { jwtToken: token, fullName: name, email: email, id: id } = response.data;
+            console.log("response --> ",response.data);
 
-                saveToken(token, { name, email, id });
+            if (response.status === 200 || response.status === 201) {
+                const { jwtToken: token, fullName, email, id } = response.data;
+
+                saveToken(token, { fullName, email, id });
                 setSubmitStatus({ success: "Signup successful!" });
+
+
+                const userResponse = await axios.get("http://3.211.174.23/api/profile", {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+
+                localStorage.setItem('fullName', fullName);
+
                 resetForm();
                 navigate("/dashboard", { replace: true });
             } else {

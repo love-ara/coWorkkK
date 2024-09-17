@@ -47,8 +47,8 @@ const Login = ()=> {
                 });
 
                 console.log("user res: ",userResponse)
-                const { fullName: name, email } = userResponse.data;
-                localStorage.setItem('username', name);
+                const { fullName, email } = userResponse.data;
+                localStorage.setItem('fullName', fullName);
 
                 console.log("user: ", email)
                 navigate("/dashboard", {replace: true});

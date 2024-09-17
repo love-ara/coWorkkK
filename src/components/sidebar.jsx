@@ -44,7 +44,7 @@ const SideBar = () => {
 
 
 
-    const userName = localStorage.getItem('username');
+    const userName = localStorage.getItem('fullName');
     // const userAvatar = authState.token?.avatar || {userImage};
     const userAvatar = {userImage};
 
