@@ -54,7 +54,8 @@ const Signup = () => {
                 setSubmitStatus({ error: response.data?.message || "Something went wrong. Please try again." });
             }
         } catch (error) {
-            setSubmitStatus({ error: error.response?.data?.message || "An error occurred during signup." });
+            console.log("error: ", error)
+            setSubmitStatus({ error: error.response.data });
         } finally {
             setSubmitting(false);
         }
