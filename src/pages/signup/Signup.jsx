@@ -3,6 +3,7 @@ import backgroundDesign from "../../assets/signuppageassets/background-design.pn
 import backgroundCover from "../../assets/signuppageassets/background-cover.png";
 import backgroundLogo from "../../assets/signuppageassets/background-logo.png";
 import logo from "../../assets/signuppageassets/Taskiro.png";
+import companyLogo from "../../assets/signuppageassets/new-footer-logo- design.png"
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
@@ -78,9 +79,10 @@ const Signup = () => {
                 <img src={backgroundLogo} alt={"Background logo"} className={style.backgroundLogo} />
                 <div className={style.modal}>
                     <div className={style.companyLogo}>
-                        <p style={{ color: "black", fontSize: "25px", fontFamily: "Montserrat", fontWeight: "700" }}>
-                            Co<span style={{ color: "rgb(122, 111, 190)" }}>workk</span>
-                        </p>
+                        <img src={companyLogo} alt={"Logo"} />
+                        {/*<p style={{ color: "black", fontSize: "25px", fontFamily: "Montserrat", fontWeight: "700" }}>*/}
+                        {/*    Co<span style={{ color: "rgb(122, 111, 190)" }}>workk</span>*/}
+                        {/*</p>*/}
                     </div>
                     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                         {({ isSubmitting }) => (

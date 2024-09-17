@@ -3,12 +3,14 @@ import backgroundDesign from "../../assets/signuppageassets/background-design.pn
 import backgroundCover from "../../assets/signuppageassets/background-cover.png"
 import backgroundLogo from "../../assets/signuppageassets/background-logo.png"
 // import logo from "../../assets/signuppageassets/Taskiro.png"
+import companyLogo from "../../assets/signuppageassets/new-footer-logo- design.png"
 import {Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import axios from "axios";
 import {useAuth} from "../../context/AuthContext";
+
 
 
 const Login = ()=> {
@@ -73,15 +75,16 @@ const Login = ()=> {
                 <img src={backgroundLogo} alt={"Background logo"} className={style.backgroundLogo}/>
                 <div className={style.modal}>
                     <div className={style.companyLogo}>
+                        <img src={companyLogo} alt={"Logo"}/>
                         {/*<img src={logo} alt={"Company Logo"}/>*/}
-                        <p style={{
-                            color: "black",
-                            fontSize: "25px",
-                            fontFamily: "Montserrat",
-                            fontWeight: "700"
-                        }}>Co<span style={{
-                            color: "rgb(122, 111, 190)"
-                        }}>workk</span></p>
+                        {/*<p style={{*/}
+                        {/*    color: "black",*/}
+                        {/*    fontSize: "25px",*/}
+                        {/*    fontFamily: "Montserrat",*/}
+                        {/*    fontWeight: "700"*/}
+                        {/*}}>Co<span style={{*/}
+                        {/*    color: "rgb(122, 111, 190)"*/}
+                        {/*}}>workk</span></p>*/}
                     </div>
                     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                         {({ isSubmitting }) => (
