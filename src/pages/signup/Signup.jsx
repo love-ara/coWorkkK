@@ -47,7 +47,7 @@ const Signup = () => {
                 setSubmitStatus({ success: "Signup successful!" });
 
 
-                const userResponse = await axios.get("http://3.211.174.23/api/profile", {
+                const userResponse = await axios.get("http://localhost:8080/api/profile", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 
