@@ -2,15 +2,13 @@ import style from "./index.module.css"
 import backgroundDesign from "../../assets/signuppageassets/background-design.png"
 import backgroundCover from "../../assets/signuppageassets/background-cover.png"
 import backgroundLogo from "../../assets/signuppageassets/background-logo.png"
-// import logo from "../../assets/signuppageassets/Taskiro.png"
-import companyLogo from "../../assets/signuppageassets/new-footer-logo- design.png"
+import logo from "../../assets/signuppageassets/signup-logo- design.png"
 import {Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import axios from "axios";
 import {useAuth} from "../../context/AuthContext";
-
 
 
 const Login = ()=> {
@@ -49,8 +47,8 @@ const Login = ()=> {
                 });
 
                 console.log("user res: ",userResponse)
-                const { fullName, email } = userResponse.data;
-                localStorage.setItem('fullName', fullName);
+                const { fullName: name, email } = userResponse.data;
+                localStorage.setItem('username', name);
 
                 console.log("user: ", email)
                 navigate("/dashboard", {replace: true});
@@ -58,7 +56,7 @@ const Login = ()=> {
                 setLoginError("Invalid credentials. Please try again.");
             }
         } catch (error) {
-            setLoginError(error.response.data || "Login failed. Please try again.");
+            setLoginError(error.response?.data?.message || "Login failed. Please try again.");
         } finally {
             setSubmitting(false);
         }
@@ -75,44 +73,35 @@ const Login = ()=> {
                 <img src={backgroundLogo} alt={"Background logo"} className={style.backgroundLogo}/>
                 <div className={style.modal}>
                     <div className={style.companyLogo}>
-                        <img src={companyLogo} alt={"Logo"}/>
-                        {/*<img src={logo} alt={"Company Logo"}/>*/}
-                        {/*<p style={{*/}
-                        {/*    color: "black",*/}
-                        {/*    fontSize: "25px",*/}
-                        {/*    fontFamily: "Montserrat",*/}
-                        {/*    fontWeight: "700"*/}
-                        {/*}}>Co<span style={{*/}
-                        {/*    color: "rgb(122, 111, 190)"*/}
-                        {/*}}>workk</span></p>*/}
+                        <img src={logo} alt={"Company Logo"}/>
                     </div>
                     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                         {({ isSubmitting }) => (
 
 
                             <Form className={style.signupForm}>
-                            <label className={style.labelTag} htmlFor={"email"}>Email:</label>
-                            <Field
-                                className={style.formField}
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder="Enter your email"/>
+                                <label className={style.labelTag} htmlFor={"email"}>Email:</label>
+                                <Field
+                                    className={style.formField}
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="Enter your email"/>
 
-                            <label className={style.labelTag} htmlFor={"password"}>Password:</label>
-                            <Field
-                                style={{marginBottom: "32px"}}
-                                className={style.formField}
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="Enter your password"/>
-                            {loginError && <div className={style.errorMessage}>{loginError}</div>}
-                            <button className={style.signupButton} type="submit" disabled={isSubmitting}>
-                                {isSubmitting ? 'Logging in...' : 'Login'}
-                            </button>
-                        </Form>
-                            )}
+                                <label className={style.labelTag} htmlFor={"password"}>Password:</label>
+                                <Field
+                                    style={{marginBottom: "32px"}}
+                                    className={style.formField}
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Enter your password"/>
+                                {loginError && <div className={style.errorMessage}>{loginError}</div>}
+                                <button className={style.signupButton} type="submit" disabled={isSubmitting}>
+                                    {isSubmitting ? 'Logging in...' : 'Login'}
+                                </button>
+                            </Form>
+                        )}
                     </Formik>
                     <Link className={style.haveAccount} to='/signup'>Do not have an account? Sign up</Link>
                 </div>
@@ -124,3 +113,5 @@ const Login = ()=> {
 }
 
 export default Login;
+
+
