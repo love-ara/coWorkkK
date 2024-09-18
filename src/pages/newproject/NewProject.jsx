@@ -6,8 +6,6 @@ import {useState} from "react";
 
 const NewProject = () => {
 
-    const [taskType, setTaskType] = useState("Low");
-
     const initialValues = {
         title: "",
         description: "",
@@ -18,7 +16,6 @@ const NewProject = () => {
             .nullable()
             .min(Yup.ref("startDate"), "End date cannot be before start date"),
     };
-
 
     const validationSchema = Yup.object({
         title: Yup.string().required("Title is required"),
@@ -74,8 +71,8 @@ const NewProject = () => {
                                     <ErrorMessage name="endDate" component="div" className="error"/>
                                 </div>
 
-
                             </div>
+
 
                             <div className={style.closeAndCreateContainer}>
                                 <button className={style.cancelProjectButton} type="submit">

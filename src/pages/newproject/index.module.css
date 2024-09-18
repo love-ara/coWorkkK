@@ -60,18 +60,20 @@ div {
     width: 95%;
     height: 72px;
     margin-bottom: 15px;
+    font-size: 15px;
+    color: black;
 }
 
 .description::placeholder {
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     color: rgb(167, 164, 187);
 }
 
 .labels {
     font-family: "Montserrat", sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     font-weight:600;
     color: #413E54;
 }
@@ -92,6 +94,7 @@ div {
 
 .closeAndCreateContainer {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -103,6 +106,7 @@ div {
     padding: 8px 20px;
     border-radius: 4px;
     font-family: "Montserrat", sans-serif;
+    float: right;
 }
 
 .cancelProjectButton {
@@ -115,4 +119,6 @@ div {
     padding: 6px 18px;
     border-radius: 6px;
     font-family: "Montserrat", sans-serif;
+
 }
+

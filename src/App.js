@@ -12,6 +12,7 @@ import Login from "./pages/login/Login";
 import Home from "./pages/homepage";
 import Calendar from "./components/calendar";
 import NewProject from "./pages/newproject/NewProject";
+import Projects from "./pages/Projects/Projects";
 
 
 
@@ -25,6 +26,7 @@ function App() {
                     <Route path="/signup" element={<Signup />}/>
                     <Route path="/login" element={<Login />}/>
                     <Route path="/newproject" element={<NewProject />}/>
+                    <Route path="/projects" element={<Projects />} />
                     <Route
                         path="/dashboard"
                         element={
