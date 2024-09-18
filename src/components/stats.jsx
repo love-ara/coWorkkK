@@ -16,6 +16,10 @@ const Stats=()=>{
         title:{
             display: "flex",
             justifyContent: "space-between",
+        },
+        text:{
+            display: "flex",
+            marginTop: "20px"
         }
     }
 
@@ -25,6 +29,9 @@ const Stats=()=>{
                 <div style={styles.title}>
                     <p>Stats</p>
                     <p>...</p>
+                </div>
+                <div style={styles.text}>
+                    <p>Completed Projects</p>
                 </div>
             </div>
         </>
