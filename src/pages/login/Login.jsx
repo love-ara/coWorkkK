@@ -33,7 +33,7 @@ const Login = ()=> {
     const handleSubmit = async (values, { setSubmitting }) => {
         try {
             setLoginError(null);
-            const response = await axios.post("http://3.211.174.23/auth/sign_in",
+            const response = await axios.post("http://localhost:8080/auth/sign_in",
                 values);
 
             console.log("data: ", response.data)
@@ -42,7 +42,7 @@ const Login = ()=> {
                 const { jwtToken: token } = response.data;
                 saveToken(token);
 
-                const userResponse = await axios.get("http://3.211.174.23/api/profile", {
+                const userResponse = await axios.get("http://localhost:8080/api/profile", {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 
