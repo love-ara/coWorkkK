@@ -5,13 +5,14 @@ import facebook from "../../assets/footerpageassets/facebook.png"
 import tiktok from "../../assets/footerpageassets/tiktok.png"
 import discord from "../../assets/footerpageassets/discord.png"
 import twitter from "../../assets/footerpageassets/twitter.png"
-import googleAndAppStore from "../../assets/footerpageassets/google-and-apple-stores.png"
+import appStore from "../../assets/footerpageassets/app-store.png"
+import googlePlayStore from "../../assets/footerpageassets/google-play-store.png"
 
 const Footer = () => {
     return (
         <footer className={style.footerContainer}>
             <div>
-                <div style={{marginBottom : "25px"}}>
+                <div style={{marginBottom : "45px"}}>
                     {/*<img src={logoForFooter}  alt={"Logo"}/>*/}
                     <p style={{color : "white",
                         fontSize : "40px",
@@ -36,14 +37,15 @@ const Footer = () => {
                     <p>Make every day productive</p>
                 </div>
 
-                <div className={style.mobileDownload}>
-                    <img src={googleAndAppStore} alt={"Download on app store"}/>
-                </div>
+                {/*<div className={style.mobileDownload}>*/}
+                {/*    <img style={{marginRight: "18px"}} src={appStore}/>*/}
+                {/*    <img src={googlePlayStore} />*/}
+                {/*</div>*/}
             </div>
 
             <div className={style.lists}>
                 <div>
-                <p className={style.listHeader}>Site Map</p>
+                    <p className={style.listHeader}>Site Map</p>
                     <ul>
                         <li>Home</li>
                         <li>Features</li>

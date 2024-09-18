@@ -1,5 +1,5 @@
 import style from "./index.module.css"
-import logo from "../../assets/landingpageassets/cowork-logo.png"
+import logo from "../../assets/landingpageassets/Taskiro-logo.png"
 import mainPicture from "../../assets/landingpageassets/Swim_camp.png"
 import mapIllustration from "../../assets/landingpageassets/map-illustration.png"
 import notifications from "../../assets/landingpageassets/notifications.png"
@@ -23,7 +23,15 @@ const LandingPage = () => {
 
                 <div className={style.navBar}>
                     <div>
-                        <img src={logo} alt={"Logo"}/>
+                        {/*<img src={logo} alt={"Logo"}/>*/}
+                        <p style={{
+                            color: "black",
+                            fontSize: "60px",
+                            fontFamily: "Montserrat",
+                            fontWeight: "700"
+                        }}>Co<span style={{
+                            color: "rgb(122, 111, 190)"
+                        }}>workk</span></p>
                     </div>
                     <div className={style.rightSideNavBar}>
                         <button className={style.navBarButton}>Home</button>

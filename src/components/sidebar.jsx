@@ -10,7 +10,6 @@ import {
 } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import userImage from '../assets/defaultAvatar.png';
-import logo from "../assets/signuppageassets/new-footer-logo- design.png";
 
 
 const SideBar = () => {
@@ -103,14 +102,6 @@ const SideBar = () => {
             flexDirection: "column",
             margin: '20px'
         },
-
-        companyLogo: {
-            marginTop: "32px",
-            marginBottom: "40px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center"
-        },
         image: {
             width: "50px",
             height: "50px",
@@ -161,7 +152,7 @@ const SideBar = () => {
             )}
             <div style={styles.sider}>
                 <div style={styles.heading}>
-                    <div style={styles.companyLogo}><img src={logo} alt={"Company Logo"}/></div>
+                    <div><h3>CoWorkk</h3></div>
 
                     <div style={styles.imageContainer}>
                         <div style={styles.topColor}>
