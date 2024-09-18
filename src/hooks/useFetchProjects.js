@@ -11,7 +11,7 @@ const useFetchProjects = (token) => {
 
         const fetchProjects = async () => {
             try {
-                const response = await axios.get('http://3.211.174.23/api/projects', {
+                const response = await axios.get('http://localhost:8080/api/projects', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json',
