@@ -135,6 +135,9 @@ const SideBar = () => {
         }
     };
 
+    const squareColors = ['#f4cd80', '#f48080', '#80d9f4', '#c180f4', '#80d2f4'];
+
+
     return (
         <>
             {isMobile && (
@@ -165,6 +168,17 @@ const SideBar = () => {
                     <MenuItem icon={<MdCalendarToday />} onClick={viewCalendar}>Agenda</MenuItem>
                     <MenuItem icon={<MdPerson />}>Contacts</MenuItem>
                     <MenuItem icon={<MdChat />} onClick={handleAI}>Cowork AI</MenuItem>
+
+
+                    <SubMenu label="Favorites" style={{color: "#737089"}}>
+                        {['Refactor Project', 'CoWork', 'Alternative to...', 'Rearrangement...']
+                            .map((item, index) => (
+                            <MenuItem key={index} style={styles.menuItemWithSquare}>
+                                <div style={styles.square(squareColors[index])}></div>
+                                {item}
+                            </MenuItem>
+                        ))}
+                    </SubMenu>
                 </Menu>
 
 
