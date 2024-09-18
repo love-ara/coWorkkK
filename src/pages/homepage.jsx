@@ -29,6 +29,7 @@ const Home = () => {
             flexDirection: 'row',
             height: '100%',
             gap: "12px",
+            width: "100%",
             backgroundColor: "#f3f2f7"
         },
         heading: {
@@ -87,23 +88,23 @@ const Home = () => {
                     </header>
                     <div  style={styles.statRow}>
                             <Stats/>
-                            <Activity/>
-                            <CompletedTasks />
+                            {/*<Activity/>*/}
+                            {/*<CompletedTasks />*/}
 
                     </div>
                     <div style={styles.project}>
                         <label style={styles.label}>Ongoing projects</label>
                         <div style={styles.card}>
                             <ProjectCard/>
-                            <ProjectCard/>
-                            <ProjectCard/>
-                            <MenuRight />
+                            {/*<ProjectCard/>*/}
+                            {/*<ProjectCard/>*/}
+                            {/*<MenuRight />*/}
                         </div>
                     </div>
 
                     <div style={styles.calendar}>
                         <label style={styles.label}>Planning </label>
-                            <Cal/>
+                            {/*<Cal/>*/}
                     </div>
                 </main>
             </div>

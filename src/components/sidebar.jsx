@@ -1,22 +1,17 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import {
-    MdHome,
-    MdFolder,
-    MdCheckCircle,
-    MdCalendarToday,
-    MdPerson,
-    MdAdd, MdChat
-} from "react-icons/md";
-import userImage from "../assets/defaultAvatar.png";
+import { MdHome, MdFolder, MdCheckCircle, MdCalendarToday, MdPerson, MdAdd, MdChat } from 'react-icons/md';
 import { useNavigate } from "react-router-dom";
-import {UserContext} from "../context/UserContext";
-
+import userImage from '../assets/defaultAvatar.png';
+import { useAuth } from "../context/AuthContext";
+import useFetchProjects from '../hooks/useFetchProjects';
 
 const SideBar = () => {
+    const { authState } = useAuth();
+    const { projects } = useFetchProjects(authState.token);
+
     const [isOpen, setIsOpen] = useState(true);
     const isMobile = window.innerWidth <= 768;
-    const { user } = useContext(UserContext);
     const navigate = useNavigate();
 
     const [currentTime, setCurrentTime] = useState(new Date());
@@ -29,25 +24,25 @@ const SideBar = () => {
         return () => clearInterval(timer);
     }, []);
 
-    const handleAI = () => {
-        window.location.href = "https://cowork-ai-repo.onrender.com";
-    };
-    const createProject = () => {
-        navigate("/createproject");
+    const viewProject = () => {
+        if (projects && projects.length > 0) {
+            navigate("/projects");
+        } else {
+            console.log("No projects available");
+        }
     };
 
     const viewCalendar = () => {
-        navigate("/calendar");
+         navigate("/calendar");
+     };
+
+    const handleAI = () => {
+        window.location.href = "https://cowork-ai-repo.onrender.com";
     };
 
     const toggleSidebar = () => setIsOpen(!isOpen);
 
-    if (!user) {
-        return <div>Loading...</div>;
-    }
-
-    const userName = user?.name || 'Anonymous';
-    const userAvatar = user?.avatar || userImage;
+    const userName = localStorage.getItem('fullName');
 
     const styles = {
         sider: {
@@ -140,8 +135,6 @@ const SideBar = () => {
         }
     };
 
-    const squareColors = ['#f4cd80', '#f48080', '#80d9f4', '#c180f4', '#80d2f4'];
-
     return (
         <>
             {isMobile && (
@@ -152,16 +145,14 @@ const SideBar = () => {
             <div style={styles.sider}>
                 <div style={styles.heading}>
                     <div><h3>CoWorkk</h3></div>
-
                     <div style={styles.imageContainer}>
                         <div style={styles.topColor}>
-                            <img src={userAvatar} alt='User' style={styles.image} />
+                            <img src={userImage} alt='user' style={styles.image} />
                         </div>
                         <div style={styles.bottomColor}>
-                            <div style={{display: "flex", flexDirection:
-                                    "column", justifyContent: "center", alignItems: "center"}}>
+                            <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                                 <h3 style={{color: "white"}}>{userName}</h3>
-                                <p style={{color: "whitesmoke", marginTop: "0px"}}>{user.position || 'Member'}</p>
+                                <p style={{color: "whitesmoke", marginTop: "0px"}}>Member</p>
                             </div>
                         </div>
                     </div>
@@ -169,35 +160,25 @@ const SideBar = () => {
 
                 <Menu style={{color: "#2b2b4e"}}>
                     <MenuItem icon={<MdHome />} onClick={()=> navigate("/dashboard")}>Home</MenuItem>
-                    <MenuItem icon={<MdFolder />} onClick={createProject}>Projects</MenuItem>
+                    <MenuItem icon={<MdFolder />} onClick={viewProject}>Projects</MenuItem>
                     <MenuItem icon={<MdCheckCircle />}>Tasks</MenuItem>
                     <MenuItem icon={<MdCalendarToday />} onClick={viewCalendar}>Agenda</MenuItem>
                     <MenuItem icon={<MdPerson />}>Contacts</MenuItem>
-                    <MenuItem icon={<MdChat/>} onClick={handleAI}> Cowork AI</MenuItem>
-
-                    <SubMenu label="Favorites" style={{color: "#737089"}}>
-                        {['Refactor Project', 'CoWork', 'Alternative to...', 'Rearrangement...'].map((item, index) => (
-                            <MenuItem key={index} style={styles.menuItemWithSquare}>
-                                <div style={styles.square(squareColors[index])}></div>
-                                {item}
-                            </MenuItem>
-                        ))}
-                    </SubMenu>
+                    <MenuItem icon={<MdChat />} onClick={handleAI}>Cowork AI</MenuItem>
                 </Menu>
-
 
 
 
                 <div className="footer" style={styles.footer}>
                     <div className="new-task" style={styles.newTask}>
-                        <span>New</span>
-                        <MdAdd size={20} />
-                    </div>
-                    <div className="time">
-                        <h4>{currentTime.toLocaleTimeString()}</h4>
-                        <p>{currentTime.toLocaleDateString()}</p>
-                    </div>
-                </div>
+                                         <span>New</span>
+                                         <MdAdd size={20} />
+                                     </div>
+                                     <div className="time">
+                                         <h4>{currentTime.toLocaleTimeString()}</h4>
+                                         <p>{currentTime.toLocaleDateString()}</p>
+                                     </div>
+                             </div>
             </div>
         </>
     );

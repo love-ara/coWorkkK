@@ -11,6 +11,10 @@ import Signup from "./pages/signup/Signup";
 import Login from "./pages/login/Login";
 import Home from "./pages/homepage";
 import Calendar from "./components/calendar";
+import NewProject from "./pages/newproject/NewProject";
+import Projects from "./pages/Projects/Projects";
+
+import ProjectCard from "./components/projectCard";
 
 
 
@@ -23,11 +27,21 @@ function App() {
                     <Route path="/home" element={<NewLandingPage />} />
                     <Route path="/signup" element={<Signup />}/>
                     <Route path="/login" element={<Login />}/>
+                    <Route path="/newproject" element={<NewProject />}/>
+                    <Route path="/projects" element={<Projects />} />
                     <Route
                         path="/dashboard"
                         element={
                             <PrivateRoute>
                                 <Home />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/projects"
+                        element={
+                            <PrivateRoute>
+                                <ProjectCard />
                             </PrivateRoute>
                         }
                     />
@@ -57,6 +71,7 @@ function App() {
                     />
                     <Route
                         path="/calendar"
+                        name="Calendar"
                         element={
                             <PrivateRoute>
                                 <Calendar />

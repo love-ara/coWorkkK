@@ -2,14 +2,17 @@ import style from "./index.module.css";
 import backgroundDesign from "../../assets/signuppageassets/background-design.png";
 import backgroundCover from "../../assets/signuppageassets/background-cover.png";
 import backgroundLogo from "../../assets/signuppageassets/background-logo.png";
-import logo from "../../assets/signuppageassets/Taskiro.png";
+import logo from "../../assets/signuppageassets/new-footer-logo- design.png";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
+import {useAuth} from "../../context/AuthContext";
 
 const Signup = () => {
+    const { saveToken } = useAuth();
+
     const [submitStatus, setSubmitStatus] = useState(null);
     const navigate = useNavigate();
 
@@ -27,29 +30,44 @@ const Signup = () => {
             .min(2, "First name must be at least 2 characters")
             .required("Full name is required"),
         password: Yup.string()
-            .min(8, "Password must be at least 8 characters")
+            .min(3, "Password must be at least 8 characters")
             .required("Password is required"),
     });
 
-    // Form submission handler
+
     const handleSubmit = async (values, { setSubmitting, resetForm }) => {
         try {
-            setSubmitStatus(null);
-            const response = await axios.post("http://3.211.174.23/auth/sign_up", values);
+            const response = await axios.post("http://localhost:8080/auth/sign_up", values);
+
 
             if (response.status === 200 || response.status === 201) {
+                const { jwtToken: token, fullName, email, id } = response.data;
+
+                saveToken(token, { fullName, email, id });
                 setSubmitStatus({ success: "Signup successful!" });
+
+
+                const userResponse = await axios.get("http://localhost:8080/api/profile", {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+
+                localStorage.setItem('fullName', fullName);
+
                 resetForm();
-                navigate("/dashboard"); // Navigate to dashboard upon success
+                navigate("/dashboard", { replace: true });
             } else {
-                setSubmitStatus({ error: response.data.response || "Something went wrong. Please try again." });
+                setSubmitStatus({ error: response.data?.message || "Something went wrong. Please try again." });
             }
         } catch (error) {
-            setSubmitStatus({ error: error.response?.data?.message || "An error occurred during signup." });
+            console.log("error: ", error)
+            setSubmitStatus({ error: error.response.data });
         } finally {
             setSubmitting(false);
         }
     };
+
+
+
 
     return (
         <>
@@ -59,9 +77,7 @@ const Signup = () => {
                 <img src={backgroundLogo} alt={"Background logo"} className={style.backgroundLogo} />
                 <div className={style.modal}>
                     <div className={style.companyLogo}>
-                        <p style={{ color: "black", fontSize: "25px", fontFamily: "Montserrat", fontWeight: "700" }}>
-                            Co<span style={{ color: "rgb(122, 111, 190)" }}>workk</span>
-                        </p>
+                        <img src={logo} alt={"Company Logo"} />
                     </div>
                     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
                         {({ isSubmitting }) => (
