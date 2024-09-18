@@ -14,8 +14,6 @@ export const AuthProvider = ({ children }) => {
         try {
             const authData = { token, ...user };
 
-            console.log("user data = ", authData)
-            console.log("user data = ", user)
             localStorage.setItem("authData", JSON.stringify(authData));
             setAuthState(authData);
         } catch (error) {

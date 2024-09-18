@@ -11,6 +11,7 @@ import Signup from "./pages/signup/Signup";
 import Login from "./pages/login/Login";
 import Home from "./pages/homepage";
 import Calendar from "./components/calendar";
+import ProjectCard from "./components/projectCard";
 
 
 
@@ -28,6 +29,14 @@ function App() {
                         element={
                             <PrivateRoute>
                                 <Home />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/projects"
+                        element={
+                            <PrivateRoute>
+                                <ProjectCard />
                             </PrivateRoute>
                         }
                     />
