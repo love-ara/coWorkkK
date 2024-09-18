@@ -14,6 +14,8 @@ import Calendar from "./components/calendar";
 import NewProject from "./pages/newproject/NewProject";
 import Projects from "./pages/Projects/Projects";
 
+import ProjectCard from "./components/projectCard";
+
 
 
 function App() {
@@ -32,6 +34,14 @@ function App() {
                         element={
                             <PrivateRoute>
                                 <Home />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/projects"
+                        element={
+                            <PrivateRoute>
+                                <ProjectCard />
                             </PrivateRoute>
                         }
                     />

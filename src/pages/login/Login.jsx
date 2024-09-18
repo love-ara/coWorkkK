@@ -36,8 +36,6 @@ const Login = ()=> {
             const response = await axios.post("http://localhost:8080/auth/sign_in",
                 values);
 
-            console.log("data: ", response.data)
-            console.log("res: ", response)
             if (response.status === 200 || response.status === 201) {
                 const { jwtToken: token } = response.data;
                 saveToken(token);
@@ -46,17 +44,15 @@ const Login = ()=> {
                     headers: { Authorization: `Bearer ${token}` },
                 });
 
-                console.log("user res: ",userResponse)
-                const { fullName: name, email } = userResponse.data;
-                localStorage.setItem('username', name);
+                const { fullName, email } = userResponse.data;
+                localStorage.setItem('fullName', fullName);
 
-                console.log("user: ", email)
                 navigate("/dashboard", {replace: true});
             } else {
                 setLoginError("Invalid credentials. Please try again.");
             }
         } catch (error) {
-            setLoginError(error.response?.data?.message || "Login failed. Please try again.");
+            setLoginError(error.response.data || "Login failed. Please try again.");
         } finally {
             setSubmitting(false);
         }

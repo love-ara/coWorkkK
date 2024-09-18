@@ -48,7 +48,7 @@ const CreateProject = () => {
                 payload,
                 {
                     headers: {
-                        Authorization: `Bearer ${authState.token}`, // Use token from context
+                        Authorization: `Bearer ${authState.token}`,
                         "Content-Type": "application/json",
                     },
                 }

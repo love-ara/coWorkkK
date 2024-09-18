@@ -95,7 +95,7 @@ const Home = () => {
                     <div style={styles.project}>
                         <label style={styles.label}>Ongoing projects</label>
                         <div style={styles.card}>
-                            {/*<ProjectCard/>*/}
+                            <ProjectCard/>
                             {/*<ProjectCard/>*/}
                             {/*<ProjectCard/>*/}
                             {/*<MenuRight />*/}
