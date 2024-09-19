@@ -15,6 +15,7 @@ import NewProject from "./pages/newproject/NewProject";
 import Projects from "./pages/Projects/Projects";
 
 import ProjectCard from "./components/projectCard";
+import CreateNew from "./components/createNew";
 
 
 
@@ -29,6 +30,7 @@ function App() {
                     <Route path="/login" element={<Login />}/>
                     <Route path="/newproject" element={<NewProject />}/>
                     <Route path="/projects" element={<Projects />} />
+                    <Route path="/create" element={<CreateNew />} />
                     <Route
                         path="/dashboard"
                         element={
@@ -54,7 +56,7 @@ function App() {
                         }
                     />
                     <Route
-                        path="/createtask"
+                        path="/createTask"
                         element={
                             <PrivateRoute>
                                 <CreateTask />

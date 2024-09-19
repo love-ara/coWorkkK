@@ -1,4 +1,5 @@
 import React from 'react';
+import {FaEllipsis} from "react-icons/fa6";
 
 
 const Stats=()=>{
@@ -16,6 +17,7 @@ const Stats=()=>{
         title:{
             display: "flex",
             justifyContent: "space-between",
+            color:"#a9a6b5",
         },
         text:{
             display: "flex",
@@ -28,7 +30,7 @@ const Stats=()=>{
             <div style={styles.container}>
                 <div style={styles.title}>
                     <p>Stats</p>
-                    <p>...</p>
+                    <FaEllipsis />
                 </div>
                 <div style={styles.text}>
                     <p>Completed Projects</p>

@@ -44,6 +44,10 @@ const SideBar = () => {
 
     const userName = localStorage.getItem('fullName');
 
+    const handleClick = ()=>{
+        navigate("/create");
+    }
+
     const styles = {
         sider: {
             borderRadius: '25px',
@@ -63,30 +67,32 @@ const SideBar = () => {
         menuItemWithSquare: {
             position: 'relative',
             paddingLeft: '30px',
+            marginLeft: "20px"
         },
         square: (color) => ({
             content: '""',
             position: 'absolute',
             left: '10px',
             top: '50%',
-            transform: 'translateY(-50%)',
+            transform: 'translateY(-45%)',
             width: '12px',
             height: '12px',
-            borderRadius: '20px',
+            borderRadius: '5px',
             backgroundColor: color,
         }),
         footer: {
-            marginTop: "auto",
-            borderTop: "1px dashed #ccc",
+            // marginTop: "auto",
+            // borderTop: "1px dashed #ccc",
             paddingTop: "10px",
             textAlign: "center",
             color: "#b19cd9",
+            marginTop: "40px",
         },
-        newTask: {
+        createIcon: {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            padding: "10px",
+            padding: "20px",
             border: "1px dashed #ccc",
             borderRadius: "10px",
             marginBottom: "10px",
@@ -184,9 +190,15 @@ const SideBar = () => {
 
 
                 <div className="footer" style={styles.footer}>
-                    <div className="new-task" style={styles.newTask}>
+                    <div className="new-task" style={styles.createIcon}>
                                          <span>New</span>
-                                         <MdAdd size={20} />
+                                         <MdAdd
+                                             onClick={(handleClick)}
+                                             size={20} style={{
+                                             background: "#413e54",
+                                             borderRadius: "10px",
+                                             width: "24px"
+                                         }}  />
                                      </div>
                                      <div className="time">
                                          <h4>{currentTime.toLocaleTimeString()}</h4>
