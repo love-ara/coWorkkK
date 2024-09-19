@@ -175,7 +175,7 @@ const styles = {
         alignItems: "center",
         justifyContent: "center",
         alignContent: "center",
-        width: '100%',
+        // width: '100%',
         // maxWidth: '1000px',
         height: 'auto',
         padding: '20px',
@@ -242,7 +242,7 @@ const styles = {
         height: '100px',
     },
     simpleCalendarContainer: {
-        width: '100%',
+        width: '1085px',
         alignContent: "center",
         // justifyContent: 'space-evenly',
         // maxWidth: '1000px',

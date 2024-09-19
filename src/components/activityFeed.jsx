@@ -1,4 +1,5 @@
 import React from 'react';
+import {FaEllipsis} from "react-icons/fa6";
 
 
 const Activity=()=>{
@@ -16,6 +17,7 @@ const Activity=()=>{
         title:{
             display: "flex",
             justifyContent: "space-between",
+            color:"#a9a6b5",
         }
     }
 
@@ -24,7 +26,7 @@ const Activity=()=>{
             <div style={styles.container}>
                 <div style={styles.title}>
                     <p>Activity Feed</p>
-                    <p>...</p>
+                    <FaEllipsis />
                 </div>
             </div>
         </>
