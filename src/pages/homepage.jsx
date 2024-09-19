@@ -29,7 +29,7 @@ const Home = () => {
             height: '190vh',
             gap: "10px",
             width: "100%",
-            padding: "10px",
+            // padding: "5px",
             backgroundColor: "#f3f2f7",
             overflow: 'hidden',
         },
@@ -41,7 +41,7 @@ const Home = () => {
         content: {
             flex: 1,
             marginLeft: isMobile ? '0' : '50px',
-            padding: '2px',
+            // padding: '2px',
             display: 'flex',
             flexDirection: 'column',
             // gap: '12px',
@@ -81,7 +81,7 @@ const Home = () => {
         menuRight:{
             position: 'absolute',
             right: 0,
-            top: '50%',
+            top: '65%',
         }
     };
 
@@ -98,7 +98,7 @@ const Home = () => {
                     <div style={styles.statRow}>
                         <Stats />
                         <Activity />
-                        {/*<CompletedTasks />*/}
+                        <CompletedTasks />
                     </div>
                     <div style={{ marginTop: "50px"}}>
                         <label style={styles.label}>Ongoing projects</label>

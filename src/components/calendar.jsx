@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-
-
 import { useLocation } from 'react-router-dom';
 import AddReminder from './forms/addReminder';
+
 
 const Cal = () => {
     const location = useLocation();
