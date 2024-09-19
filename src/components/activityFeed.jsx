@@ -9,7 +9,7 @@ const Activity=()=>{
             padding: "10px",
             position: 'relative',
             height: '260px',
-            width: '499px',
+            width: '350px',
             borderRadius: "10px",
             overflow: 'hidden',
             background: "#ffffff"
