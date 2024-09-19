@@ -11,102 +11,116 @@ import MenuRight from "../components/menuRight";
 const Home = () => {
     const isMobile = window.innerWidth <= 768;
 
-    const styles ={
-
-        sidebar : {
+    const styles = {
+        sidebar: {
             height: '100%',
             marginTop: isMobile ? '16px' : '24px',
             marginLeft: isMobile ? '10px' : '20px',
             borderRadius: '25px',
-            // overflow: 'hidden',
-            width: isMobile ? '100%' : '250px',
-            // height: isMobile ? 'auto' : '100vh',
+            width: isMobile ? '42%' : '250px',
             backgroundColor: '#ffffff',
-            // boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+            // position: 'sticky',
+            // top: 0,
+
         },
         container: {
             display: 'flex',
             flexDirection: 'row',
-            height: '100%',
-            gap: "12px",
+            height: '190vh',
+            gap: "10px",
             width: "100%",
-            backgroundColor: "#f3f2f7"
+            padding: "10px",
+            backgroundColor: "#f3f2f7",
+            overflow: 'hidden',
         },
         heading: {
-            // marginBottom: '10px',
+            marginTop: '20px',
+            marginBottom: '20px',
+            width: "100%",
         },
         content: {
-            // flex: 1,
+            flex: 1,
             marginLeft: isMobile ? '0' : '50px',
             padding: '2px',
             display: 'flex',
             flexDirection: 'column',
             // gap: '12px',
+            overflowY: 'auto',
         },
-        statRow:{
+        statRow: {
             display: "flex",
             flexDirection: "row",
-            justifyContent: "space-between",
-            gap: "20px",
-            width: "100%"
+            // justifyContent: "space-between",
+            gap: "12px",
+            width: "100%",
         },
         project: {
-// marginBottom: "20px"
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: 'wrap',
         },
-        card:{
+        card: {
             padding: "10px",
             display: "flex",
             flexDirection: "row",
             gap: "10px",
-            width: "100%",
+            flex: 1,
         },
-        label:{
+        label: {
             fontFamily: "Montserrat",
             fontSize: '20px',
             fontWeight: '700',
             color: "#413E54",
         },
-        calendar:{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-around",
+        calendar: {
+            // display: "flex",
+            // flexDirection: "column",
+            // justifyContent: "space-around",
             width: "100%",
+        },
+        menuRight:{
+            position: 'absolute',
+            right: 0,
+            top: '50%',
         }
-
     };
-
 
     return (
         <>
             <div style={styles.container}>
                 <div style={styles.sidebar}>
-                    <SideBar/>
+                    <SideBar />
                 </div>
                 <main style={styles.content}>
-                    <header>
-                        <Header/>
+                    <header style={styles.heading}>
+                        <Header />
                     </header>
-                    <div  style={styles.statRow}>
-                            <Stats/>
-                            {/*<Activity/>*/}
-                            {/*<CompletedTasks />*/}
-
+                    <div style={styles.statRow}>
+                        <Stats />
+                        <Activity />
+                        {/*<CompletedTasks />*/}
                     </div>
-                    <div style={styles.project}>
+                    <div style={{ marginTop: "50px"}}>
                         <label style={styles.label}>Ongoing projects</label>
-                        <div style={styles.card}>
-                            <ProjectCard/>
-                            {/*<ProjectCard/>*/}
-                            {/*<ProjectCard/>*/}
-                            {/*<MenuRight />*/}
+                        <div style={styles.project}>
+                            <div style={styles.card}>
+                                <ProjectCard />
+                                <ProjectCard />
+                                {/*<ProjectCard />*/}
+                            </div>
                         </div>
                     </div>
 
                     <div style={styles.calendar}>
                         <label style={styles.label}>Planning </label>
-                            {/*<Cal/>*/}
+                        <Cal />
                     </div>
+
                 </main>
+                <div style={styles.menuRight}>
+                    <MenuRight />
+                </div>
+
             </div>
         </>
     );

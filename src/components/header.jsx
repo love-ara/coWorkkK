@@ -3,10 +3,17 @@ import React from 'react';
 const Header = () =>{
     const styles ={
         header: {
-            height: "150px",
-            width: "500px",
             display: "flex",
             flexDirection: "column",
+            marginBottom: "5px"
+        },
+        homeText: {
+            fontSize: "24px",
+            color: "#696680",
+        },
+        text:{
+            fontSize: "15px",
+            fontWeight: 600
         }
     };
 
@@ -14,8 +21,8 @@ const Header = () =>{
     return(
         <>
             <header style={styles.header}>
-                <h1>Home</h1>
-                <h3>Welcome to your Dashboard!</h3>
+                <p style={styles.homeText}>Home</p>
+                <p style={styles.text}>Welcome to your dashboard</p>
             </header>
         </>
 )
