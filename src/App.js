@@ -1,17 +1,15 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './pages/LandingPage';
 import CreateProject from "./pages/createProject/CreateProject";
 import CreateTask from "./pages/createTask/CreateTask";
 import UpdateTask from "./pages/editTask/EditTask";
 import PrivateRoute from "./components/PrivateRoute";
-import NewLandingPage from "./pages/landingPage/LandingPage"
+import LandingPage from "./pages/landingPage/LandingPage"
 import Signup from "./pages/signup/Signup";
 import Login from "./pages/login/Login";
 import Home from "./pages/homepage";
 import Calendar from "./components/calendar";
-import NewProject from "./pages/newproject/NewProject";
 import Projects from "./pages/Projects/Projects";
 
 import ProjectCard from "./components/projectCard";
@@ -24,13 +22,11 @@ function App() {
     return (
             <Router>
                 <Routes>
-                    <Route path="/" element={<NewLandingPage />} />
-                    <Route path="/home" element={<NewLandingPage />} />
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/home" element={<LandingPage />} />
                     <Route path="/signup" element={<Signup />}/>
                     <Route path="/login" element={<Login />}/>
-                    <Route path="/newproject" element={<NewProject />}/>
-                    <Route path="/projects" element={<Projects />} />
-                    <Route path="/create" element={<CreateNew />} />
+
                     <Route
                         path="/dashboard"
                         element={
@@ -47,16 +43,35 @@ function App() {
                             </PrivateRoute>
                         }
                     />
+                    <Route path="/create"
+                           element={
+                               <PrivateRoute>
+
+                               <CreateNew />
+                                   </PrivateRoute>
+                           }
+                               />
+
+
                     <Route
-                        path="/createproject"
+                        path="/create_project"
                         element={
                             <PrivateRoute>
                                 <CreateProject />
                             </PrivateRoute>
                         }
                     />
+
+                    <Route path="/projects"
+                           element={
+                            <PrivateRoute>
+                                <Projects />
+                            </PrivateRoute>
+                        }
+                    />
+
                     <Route
-                        path="/createTask"
+                        path="/create_task"
                         element={
                             <PrivateRoute>
                                 <CreateTask />
@@ -64,7 +79,7 @@ function App() {
                         }
                     />
                     <Route
-                        path="/edittask"
+                        path="/edit_task"
                         element={
                             <PrivateRoute>
                                 <UpdateTask />

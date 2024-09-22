@@ -1,52 +1,87 @@
-import style from "./index.module.css"
-import Sidebar from "../../components/sidebar";
-import Header from "../../components/header";
+import {ErrorMessage, Field, Form, Formik} from "formik";
+import * as Yup from "yup";
+import style from "../createProject/index.module.css";
 
 const CreateTask = () => {
+
+    const initialValues = {
+        name: "",
+        description: "",
+        startDate: "",
+        endDate: "",
+        status: "NOT_STARTED",
+        priority: "LOW",
+    };
+
+    const validationSchema = Yup.object({
+        name: Yup.string().required("Title is required"),
+        description: Yup.string().required("Description is required"),
+        startDate: Yup.date().required("Start date is required").nullable(),
+        endDate: Yup.date()
+            .required("End date is required")
+            .nullable()
+            .min(Yup.ref("startDate"), "End date cannot be before start date"),
+        status: Yup.string()
+            .oneOf(["NOT_STARTED", "ONGOING", "COMPLETED"], "Invalid status")
+            .required("Status is required"),
+        priority : Yup.string()
+            .oneOf(["LOW", "MEDIUM", "HIGH", "URGENT"], "Invalid priority")
+            .required("Priority is required"),
+    });
+
     return (
         <>
-            <Header />
-            <Sidebar />
-            <div className={style.backgroundCover}>
+            <div>
+                <div>
+                    <Formik>
+                        <Form>
+                            <Field
+                                className={style.title}
+                                type="text"
+                                id="name"
+                                placeholder="New Task Title"
+                            />
+                            <ErrorMessage name="name" component="div" className={style.error}/>
 
-                <div className={style.createTask}>
-                    <p className={style.header}>Create Task</p>
-                    <hr className={style.horizontalLine} />
-                    <form>
-                        <label className={style.textLabel} htmlFor={"title"}>Title:</label>
-                        <input className={style.title} placeholder={"Title"} type={"text"} id={"title"} name={"title"}
-                               required/>
+                            <hr className={style.horizontalLine}/>
 
-                        <label className={style.textLabel} htmlFor={"description"}>Description</label>
-                        <textarea className={style.description} placeholder={"Task Description"} id={"description"}
-                                  name={"description"} required/>
+                            <Field
+                                className={style.description}
+                                as="textarea"
+                                id="description"
+                                name="description"
+                                placeholder="Project Description"
+                            />
+                            <ErrorMessage name="description" component="div" className={style.error}/>
 
-                        <label className={style.textLabel} htmlFor="start-date">Start Date:</label>
-                        <input className={style.dates} type="datetime-local" id="start-date" name="start-date"
-                               required/>
+                            <div className={style.selectContainer}>
+                                <label className={style.labels} htmlFor="status">
+                                    Project Status:&nbsp;&nbsp;
+                                </label>
+                                <Field
+                                    className={style.statusDropdown}
+                                    as="select"
+                                    name="status"
+                                    id="status"
+                                >
+                                    <option value="NOT_STARTED">Not Started</option>
+                                    <option value="ONGOING">Ongoing</option>
+                                    <option value="COMPLETED">Completed</option>
+                                </Field>
+                                <ErrorMessage
+                                    name="status"
+                                    component="div"
+                                    className={style.error}
+                                />
+                            </div>
 
-                        <label className={style.textLabel} htmlFor="due-date">Due Date:</label>
-                        <input  className={style.dates} type="datetime-local"
-                                id="due-date" name="due-date" required/>
-
-                        <label className={style.textLabel} >Priority:</label>
-                        <select className={style.priority} style={{marginBottom: "15px"}} id={"priority"} name={"priority"} required>
-                            <option value={"LOW"}>Low</option>
-                            <option>Medium</option>
-                            <option>High</option>
-                            <option>Urgent</option>
-                        </select>
-
-                        <button className={style.cancelButton} type={"submit"}>Cancel</button>
-                        <button className={style.createTaskButton} type="submit">Create Task</button>
-
-                    </form>
+                        </Form>
+                    </Formik>
                 </div>
-
             </div>
-
         </>
     )
+
 }
 
-export default CreateTask;
+export default CreateTask

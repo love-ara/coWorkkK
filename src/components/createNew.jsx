@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Home from "../pages/homepage";
-import style from "./../pages/newproject/index.module.css"
+import style from "../pages/createProject/index.module.css"
 import {FaTasks, FaTrello} from "react-icons/fa";
 import projectIcon from "./../assets/projectIcon.png"
 import kanbanIcon from "./../assets/kanbanIcon.png"
@@ -19,10 +19,10 @@ const CreateNew = () => {
     }
 
     const createProject= ()=>{
-        navigate("/newProject")
+        navigate("/create_project")
     }
  const createTask= ()=>{
-        navigate("/createTask")
+        navigate("/create_task")
     }
 
     const styles = {

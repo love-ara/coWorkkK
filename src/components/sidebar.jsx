@@ -33,8 +33,8 @@ const SideBar = () => {
     };
 
     const viewCalendar = () => {
-         navigate("/calendar");
-     };
+        navigate("/calendar");
+    };
 
     const handleAI = () => {
         window.location.href = "https://cowork-ai-repo.onrender.com";
@@ -52,17 +52,24 @@ const SideBar = () => {
         sider: {
             borderRadius: '25px',
             width: isOpen || !isMobile ? '250px' : '0',
-            height: '190vh',
+            height: '170vh',
             // background: '#ffffff',
             // overflow: 'hidden',
             transition: 'width 0.3s ease',
             // boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+
+            marginTop: isMobile ? '16px' : '24px',
+            marginLeft: isMobile ? '10px' : '20px',
+            // borderRadius: '25px',
+            // width: isMobile ? '42%' : '250px',
+            backgroundColor: '#ffffff',
         },
         toggleButton: {
             position: 'fixed',
-            top: '10px',
+            top: '1px',
             left: '10px',
-            zIndex: '1000',
+            // zIndex: '1000',
+            border: "none"
         },
         menuItemWithSquare: {
             position: 'relative',
@@ -81,12 +88,11 @@ const SideBar = () => {
             backgroundColor: color,
         }),
         footer: {
-            // marginTop: "auto",
-            // borderTop: "1px dashed #ccc",
             paddingTop: "10px",
+            paddingBottom: "20px",
             textAlign: "center",
             color: "#b19cd9",
-            marginTop: "40px",
+            position: 'sticky',
         },
         createIcon: {
             display: "flex",
@@ -111,7 +117,7 @@ const SideBar = () => {
             objectFit: "cover",
             zIndex: 2,
             position: 'absolute',
-            marginLeft: "69px",
+            marginLeft: "80px",
             marginTop: "8px"
         },
         imageContainer: {
@@ -138,7 +144,9 @@ const SideBar = () => {
             height: '80%',
             backgroundColor: '#3b3946',
             zIndex: 0,
-        }
+        },
+
+
     };
 
     const squareColors = ['#f4cd80', '#f48080', '#80d9f4', '#c180f4', '#80d2f4'];
@@ -179,11 +187,11 @@ const SideBar = () => {
                     <SubMenu label="Favorites" style={{color: "#737089"}}>
                         {['Refactor Project', 'CoWork', 'Alternative to...', 'Rearrangement...']
                             .map((item, index) => (
-                            <MenuItem key={index} style={styles.menuItemWithSquare}>
-                                <div style={styles.square(squareColors[index])}></div>
-                                {item}
-                            </MenuItem>
-                        ))}
+                                <MenuItem key={index} style={styles.menuItemWithSquare}>
+                                    <div style={styles.square(squareColors[index])}></div>
+                                    {item}
+                                </MenuItem>
+                            ))}
                     </SubMenu>
                 </Menu>
 
@@ -191,20 +199,20 @@ const SideBar = () => {
 
                 <div className="footer" style={styles.footer}>
                     <div className="new-task" style={styles.createIcon}>
-                                         <span>New</span>
-                                         <MdAdd
-                                             onClick={(handleClick)}
-                                             size={20} style={{
-                                             background: "#413e54",
-                                             borderRadius: "10px",
-                                             width: "24px"
-                                         }}  />
-                                     </div>
-                                     <div className="time">
-                                         <h4>{currentTime.toLocaleTimeString()}</h4>
-                                         <p>{currentTime.toLocaleDateString()}</p>
-                                     </div>
-                             </div>
+                        <span>New</span>
+                        <MdAdd
+                            onClick={(handleClick)}
+                            size={20} style={{
+                            background: "#413e54",
+                            borderRadius: "10px",
+                            width: "24px"
+                        }}  />
+                    </div>
+                    <div className="time">
+                        <h4>{currentTime.toLocaleTimeString()}</h4>
+                        <p>{currentTime.toLocaleDateString()}</p>
+                    </div>
+                </div>
             </div>
         </>
     );
