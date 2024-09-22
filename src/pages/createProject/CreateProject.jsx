@@ -1,32 +1,36 @@
-import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import style from "./index.module.css";
-import SideBar from "../../components/sidebar";
+import Home from "../homepage";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import * as Yup from "yup";
+import {useNavigate} from "react-router-dom";
+import {useAuth} from "../../context/AuthContext";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-
-
-const tagOptions = ["angular", "node", "react", "vue", "javascript"];
 
 const CreateProject = () => {
     const navigate = useNavigate();
-    const { authState } = useAuth(); // Access the authState from context
+    const { authState } = useAuth();
 
     const initialValues = {
         name: "",
         description: "",
-        tags: [],
-        category: ""
+        startDate: "",
+        endDate: "",
+        status: "NOT_STARTED",
     };
 
     const validationSchema = Yup.object({
-        name: Yup.string().required("Name is required"),
+        name: Yup.string().required("Title is required"),
         description: Yup.string().required("Description is required"),
-        tags: Yup.array().of(Yup.string()).min(1, "At least one tag is required"),
-        category: Yup.string().required("Category is required")
+        startDate: Yup.date().required("Start date is required").nullable(),
+        endDate: Yup.date()
+            .required("End date is required")
+            .nullable()
+            .min(Yup.ref("startDate"), "End date cannot be before start date"),
+        status: Yup.string()
+            .oneOf(["NOT_STARTED", "ONGOING", "COMPLETED"], "Invalid status")
+            .required("Status is required"),
     });
+
 
     const handleSubmit = async (values, { setSubmitting, setErrors }) => {
         try {
@@ -37,18 +41,19 @@ const CreateProject = () => {
             const payload = {
                 name: values.name,
                 description: values.description,
-                tags: values.tags,
-                category: values.category
+                startDate: values.startDate,
+                endDate: values.endDate,
+                status: values.status
             };
 
             console.log("Submitting Payload:", payload);
 
             const response = await axios.post(
-                "http://3.211.174.23/api/projects",
+                "http://localhost:8080/api/projects",
                 payload,
                 {
                     headers: {
-                        Authorization: `Bearer ${authState.token}`,
+                        Authorization: `Bearer ${authState.token}`, // Use token from context
                         "Content-Type": "application/json",
                     },
                 }
@@ -76,86 +81,110 @@ const CreateProject = () => {
 
     return (
         <>
-            <div className={style.pageContainer}>
-                <SideBar />
+            <Home />
+            <div className={style.darkBackgroundCover}>
+                <div className={style.createProject}>
+                    <Formik
+                        initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit={handleSubmit}
+                    >
+                        <Form>
+                            <Field
+                                className={style.title}
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="New Project Title"
+                            />
+                            <ErrorMessage name="name" component="div" className={style.error}/>
 
-                <div className={style.formContainer}>
-                    <div className={style.createProject}>
-                        <p className={style.header}>Create Project</p>
-                        <hr className={style.horizontalLine} />
-                        <Formik
-                            initialValues={initialValues}
-                            validationSchema={validationSchema}
-                            onSubmit={handleSubmit}
-                        >
-                            {({ isSubmitting, setFieldValue }) => (
-                                <Form>
-                                    <label className={style.textLabel} htmlFor="name">Title:</label>
+                            <hr className={style.horizontalLine}/>
+
+                            <Field
+                                className={style.description}
+                                as="textarea"
+                                id="description"
+                                name="description"
+                                placeholder="Project Description"
+                            />
+                            <ErrorMessage
+                                name="description"
+                                component="div"
+                                className={style.error}
+                            />
+
+                            <div className={style.selectContainer}>
+                                <label className={style.labels} htmlFor="status">
+                                    Project Status:&nbsp;&nbsp;
+                                </label>
+                                <Field
+                                    className={style.statusDropdown}
+                                    as="select"
+                                    name="status"
+                                    id="status"
+                                >
+                                    <option value="NOT_STARTED">Not Started</option>
+                                    <option value="ONGOING">Ongoing</option>
+                                    <option value="COMPLETED">Completed</option>
+                                </Field>
+                                <ErrorMessage
+                                    name="status"
+                                    component="div"
+                                    className={style.error}
+                                />
+                            </div>
+
+                            <div className={style.datesContainer}>
+                                <div>
+                                    <label className={style.labels} htmlFor="startDate">
+                                        Start Date:&nbsp;&nbsp;
+                                    </label>
                                     <Field
-                                        className={style.title}
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        placeholder="Title"
+                                        className={style.dates}
+                                        type="date"
+                                        name="startDate"
+                                        id="startDate"
                                     />
-                                    <ErrorMessage name="name" component="div" className={style.error} />
-
-                                    <label className={style.textLabel} htmlFor="description">Description:</label>
-                                    <Field
-                                        className={style.description}
-                                        as="textarea"
-                                        id="description"
-                                        name="description"
-                                        placeholder="Project Description"
+                                    <ErrorMessage
+                                        name="startDate"
+                                        component="div"
+                                        className={style.error}
                                     />
-                                    <ErrorMessage name="description" component="div" className={style.error} />
+                                </div>
 
-                                    <label className={style.textLabel} htmlFor="tags">Tags:</label>
+                                <div style={{marginBottom: "24px"}}>
+                                    <label className={style.labels} htmlFor="endDate">
+                                        End Date:&nbsp;&nbsp;
+                                    </label>
                                     <Field
-                                        as="select"
-                                        id="tags"
-                                        name="tags"
-                                        multiple
-                                        className={style.tags}
-                                        onChange={(event) => {
-                                            const selectedTags = Array.from(event.target.selectedOptions, option => option.value);
-                                            setFieldValue("tags", selectedTags);
-                                        }}
-                                    >
-                                        {tagOptions.map(tag => (
-                                            <option key={tag} value={tag}>{tag}</option>
-                                        ))}
-                                    </Field>
-                                    <ErrorMessage name="tags" component="div" className={style.error} />
-
-                                    <label className={style.textLabel} htmlFor="category">Category:</label>
-                                    <Field
-                                        className={style.category}
-                                        type="text"
-                                        id="category"
-                                        name="category"
-                                        placeholder="Category"
+                                        className={style.dates}
+                                        type="date"
+                                        name="endDate"
+                                        id="endDate"
                                     />
-                                    <ErrorMessage name="category" component="div" className={style.error} />
+                                    <ErrorMessage
+                                        name="endDate"
+                                        component="div"
+                                        className={style.error}
+                                    />
+                                </div>
+                            </div>
 
-                                    <button
-                                        className={style.cancelButton}
+
+                            <div className={style.cancelAndCreateButtonContainer}>
+                                <button className={style.cancelProjectButton}
                                         type="button"
-                                        onClick={handleCancel}
-                                    >
-                                        Cancel
-                                    </button>
-                                    <button
-                                        className={style.createProjectButton}
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                    >
-                                        Create Project
-                                    </button>
-                                </Form>
-                            )}
-                        </Formik>
-                    </div>
+                                        onClick={handleCancel}>
+                                    Cancel
+                                </button>
+
+                                <button className={style.createProjectButton} type="submit">
+                                    &#43; Create
+                                </button>
+                            </div>
+                        </Form>
+                    </Formik>
                 </div>
             </div>
         </>
