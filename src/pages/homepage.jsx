@@ -14,11 +14,11 @@ const Home = () => {
     const styles = {
         sidebar: {
             height: '100%',
-            marginTop: isMobile ? '16px' : '24px',
-            marginLeft: isMobile ? '10px' : '20px',
-            borderRadius: '25px',
-            width: isMobile ? '42%' : '250px',
-            backgroundColor: '#ffffff',
+            // marginTop: isMobile ? '16px' : '24px',
+            // marginLeft: isMobile ? '10px' : '20px',
+            // borderRadius: '25px',
+            // width: isMobile ? '42%' : '250px',
+            // backgroundColor: '#ffffff',
             // position: 'sticky',
             // top: 0,
 
